@@ -25,11 +25,12 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
           core.exportVariable('PANTS_REMOTE_STORE_ADDRESS', process.env.ACTIONS_CACHE_URL);
           core.exportVariable('PANTS_REMOTE_OAUTH_BEARER_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN);
     - name: Pants Lint
-      run: pants lint all
+      run: |
+        curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+        pants lint all
     - name: Pants Test
       run: pants test all
     - name: Pants Package
