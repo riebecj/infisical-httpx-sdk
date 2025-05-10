@@ -96,8 +96,9 @@ jobs:
         curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
     - name: Build Docs Site
       run: |
-        rm -rf docsmd/
+        rm -rf docsmd/ README.md
         mv docs/ docsmd/
+        mv HANDSDOWN.md README.md
         pants run mkdocs
     - name: Commit docs
       run: |
