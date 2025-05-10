@@ -87,7 +87,7 @@ jobs:
         git config --global user.name "github-actions"
     - name: Fetch changes from main
       run: |
-        git fetch origin main:docs
+        git pull origin main
         git checkout docs
     - name: Install Pants
       run: |
