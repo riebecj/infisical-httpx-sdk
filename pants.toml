@@ -1,0 +1,36 @@
+[GLOBAL]
+pants_version = "2.25.0"
+backend_packages = [
+    "pants.backend.python",
+    "pants.backend.experimental.python",
+    "pants.backend.experimental.python.lint.ruff.check",
+    "pants.backend.experimental.python.lint.ruff.format",
+    "pants.backend.shell",
+    "pants.backend.shell.lint.shfmt",
+    "pants.backend.shell.lint.shellcheck",
+]
+
+[anonymous-telemetry]
+enabled = false
+
+[cli.alias]
+all = "::"
+lock = "generate-lockfiles"
+venv = "export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default"
+generate-docs = ":pyproject#handsdown -- -n infisical-httpx-sdk  -t material -i src/infisical"
+
+[source]
+root_patterns = [
+    "src",
+    "/",
+]
+
+[python]
+interpreter_constraints = [">=3.11"]
+enable_resolves = true
+
+[test]
+use_coverage = true
+
+[pytest]
+install_from_resolve = "python-default"

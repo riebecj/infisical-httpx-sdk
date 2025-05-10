@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infisical-httpx-sdk"
+version = "0.1.0"
+authors = [
+    {name = "riebecj"},
+]
+description = "The Un-official Infisical Python SDK using HTTPX "
+urls = {home-page = "https://github.com/riebecj/infisical-httpx-sdk"}
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = [
+    "infisical-python-sdk", "infisical-httpx-sdk", "infisical-sdk", "infisical", "secrets", "secrets-management", "pki", "kms", "httpx"
+]
+license = {file = "LICENSE" }
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Pydantic :: 2",
+    "Framework :: AsyncIO :: 2",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "httpx==0.28.1",
+    "jwcrypto==1.5.6",
+    "keyring==25.6.0",
+    "pydantic==2.11.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "handsdown~=2.1",
+    "pytest~=8.3",
+    "pytest-asyncio~=0.26",
+    "pytest-cov~=6.1",
+    "ruff~=0.11",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["tests/*"]
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ",
+    "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE",
+    "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+ignore = ["ANN101", "ANN102", "D203", "D212"]
+
+[tool.ruff.lint.pylint]
+max-args = 6
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+addopts = "--cov=infisical --cov-report term-missing"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+asyncio_mode = "strict"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+omit = [
+    "*setup.py",
+    "*tests/*",
+    "*__global_coverage__/*",
+]
