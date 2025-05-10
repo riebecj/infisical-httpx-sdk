@@ -1,12 +1,15 @@
 # Keyring Handler
 
-[Infisical HTTPX SDK Documentation](../README.md#infisical-httpx-sdk-documentation) / [Credentials](./index.md#credentials) / Keyring Handler
+[Infisical HTTPX SDK Documentation](../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../index.md#infisical) / [Credentials](./index.md#credentials) / Keyring Handler
 
-> Auto-generated documentation for [credentials.keyring_handler](../../src/infisical/credentials/keyring_handler.py) module.
+> Auto-generated documentation for [src.infisical.credentials.keyring_handler](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py) module.
+
+- [Keyring Handler](#keyring-handler)
+  - [FileKeyringBackend](#filekeyringbackend)
 
 ## FileKeyringBackend
 
-[Show source in keyring_handler.py:13](../../src/infisical/credentials/keyring_handler.py#L13)
+[Show source in keyring_handler.py:13](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L13)
 
 A keyring backend that uses a file to store credentials.
 
@@ -29,7 +32,7 @@ class FileKeyringBackend(KeyringBackend): ...
 
 ### FileKeyringBackend().config
 
-[Show source in keyring_handler.py:41](../../src/infisical/credentials/keyring_handler.py#L41)
+[Show source in keyring_handler.py:41](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L41)
 
 Read and cache the Infisical configuration file.
 
@@ -42,7 +45,7 @@ def config(self) -> dict: ...
 
 ### FileKeyringBackend().get_password
 
-[Show source in keyring_handler.py:49](../../src/infisical/credentials/keyring_handler.py#L49)
+[Show source in keyring_handler.py:49](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L49)
 
 Retrieve a password from the keyring.
 
@@ -67,7 +70,7 @@ def get_password(self, _: str = "", __: str = "") -> str: ...
 
 ### FileKeyringBackend().get_url
 
-[Show source in keyring_handler.py:89](../../src/infisical/credentials/keyring_handler.py#L89)
+[Show source in keyring_handler.py:89](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L89)
 
 Get the URL of the logged-in user.
 
@@ -79,7 +82,7 @@ def get_url(self) -> str: ...
 
 ### FileKeyringBackend().priority
 
-[Show source in keyring_handler.py:30](../../src/infisical/credentials/keyring_handler.py#L30)
+[Show source in keyring_handler.py:30](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L30)
 
 Returns the priority of this keyring backend.
 
@@ -98,7 +101,7 @@ def priority(self) -> float: ...
 
 ### FileKeyringBackend().set_password
 
-[Show source in keyring_handler.py:96](../../src/infisical/credentials/keyring_handler.py#L96)
+[Show source in keyring_handler.py:96](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/keyring_handler.py#L96)
 
 NOT USED.
 

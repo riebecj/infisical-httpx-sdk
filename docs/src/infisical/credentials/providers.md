@@ -1,12 +1,21 @@
 # Providers
 
-[Infisical HTTPX SDK Documentation](../README.md#infisical-httpx-sdk-documentation) / [Credentials](./index.md#credentials) / Providers
+[Infisical HTTPX SDK Documentation](../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../index.md#infisical) / [Credentials](./index.md#credentials) / Providers
 
-> Auto-generated documentation for [credentials.providers](../../src/infisical/credentials/providers.py) module.
+> Auto-generated documentation for [src.infisical.credentials.providers](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py) module.
+
+- [Providers](#providers)
+  - [BaseInfisicalProvider](#baseinfisicalprovider)
+  - [InfisicalConfigFileProvider](#infisicalconfigfileprovider)
+  - [InfisicalCredentialProviderChain](#infisicalcredentialproviderchain)
+  - [InfisicalCredentials](#infisicalcredentials)
+  - [InfisicalCredentialsError](#infisicalcredentialserror)
+  - [InfisicalEnvironmentProvider](#infisicalenvironmentprovider)
+  - [InfisicalExplicitProvider](#infisicalexplicitprovider)
 
 ## BaseInfisicalProvider
 
-[Show source in providers.py:112](../../src/infisical/credentials/providers.py#L112)
+[Show source in providers.py:112](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L112)
 
 Base class for Infisical credential providers.
 
@@ -29,7 +38,7 @@ class BaseInfisicalProvider(ABC): ...
 
 ### BaseInfisicalProvider()._load
 
-[Show source in providers.py:131](../../src/infisical/credentials/providers.py#L131)
+[Show source in providers.py:131](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L131)
 
 Implement the provider-specific credentials loading method.
 
@@ -42,7 +51,7 @@ def _load(self) -> None: ...
 
 ### BaseInfisicalProvider().load
 
-[Show source in providers.py:136](../../src/infisical/credentials/providers.py#L136)
+[Show source in providers.py:136](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L136)
 
 Load the provided credentials.
 
@@ -64,7 +73,7 @@ def load(self, url: str = "") -> InfisicalCredentials | None: ...
 
 ## InfisicalConfigFileProvider
 
-[Show source in providers.py:160](../../src/infisical/credentials/providers.py#L160)
+[Show source in providers.py:160](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L160)
 
 Provides credentials from the Infisical configuration file.
 
@@ -86,7 +95,7 @@ class InfisicalConfigFileProvider(BaseInfisicalProvider): ...
 
 ### InfisicalConfigFileProvider()._load
 
-[Show source in providers.py:170](../../src/infisical/credentials/providers.py#L170)
+[Show source in providers.py:170](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L170)
 
 Load credentials from the Infisical configuration file.
 
@@ -100,7 +109,7 @@ def _load(self) -> None: ...
 
 ## InfisicalCredentialProviderChain
 
-[Show source in providers.py:221](../../src/infisical/credentials/providers.py#L221)
+[Show source in providers.py:221](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L221)
 
 Credential provider chain for Infisical.
 
@@ -124,7 +133,7 @@ class InfisicalCredentialProviderChain:
 
 ### InfisicalCredentialProviderChain().add_provider
 
-[Show source in providers.py:247](../../src/infisical/credentials/providers.py#L247)
+[Show source in providers.py:247](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L247)
 
 Add a provider to the chain.
 
@@ -145,7 +154,7 @@ def add_provider(self, provider: BaseInfisicalProvider, index: int = 0) -> None:
 
 ### InfisicalCredentialProviderChain().resolve
 
-[Show source in providers.py:256](../../src/infisical/credentials/providers.py#L256)
+[Show source in providers.py:256](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L256)
 
 Resolve credentials using the provider chain.
 
@@ -163,7 +172,7 @@ def resolve(self) -> InfisicalCredentials: ...
 
 ## InfisicalCredentials
 
-[Show source in providers.py:18](../../src/infisical/credentials/providers.py#L18)
+[Show source in providers.py:18](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L18)
 
 Represents Infisical credentials.
 
@@ -185,7 +194,7 @@ class InfisicalCredentials:
 
 ### InfisicalCredentials()._check_refresh
 
-[Show source in providers.py:85](../../src/infisical/credentials/providers.py#L85)
+[Show source in providers.py:85](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L85)
 
 Check if the credentials are expired, and refreshes them if available.
 
@@ -201,7 +210,7 @@ def _check_refresh(self) -> None: ...
 
 ### InfisicalCredentials().get_token
 
-[Show source in providers.py:51](../../src/infisical/credentials/providers.py#L51)
+[Show source in providers.py:51](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L51)
 
 Get the JWT token.
 
@@ -213,7 +222,7 @@ def get_token(self) -> str: ...
 
 ### InfisicalCredentials().is_valid
 
-[Show source in providers.py:47](../../src/infisical/credentials/providers.py#L47)
+[Show source in providers.py:47](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L47)
 
 Check if the credentials are valid.
 
@@ -225,7 +234,7 @@ def is_valid(self) -> bool: ...
 
 ### InfisicalCredentials().refresh
 
-[Show source in providers.py:60](../../src/infisical/credentials/providers.py#L60)
+[Show source in providers.py:60](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L60)
 
 Refresh the credentials by calling the Infisical auth endpoint.
 
@@ -240,7 +249,7 @@ def refresh(self) -> None: ...
 
 ### InfisicalCredentials().refreshable
 
-[Show source in providers.py:56](../../src/infisical/credentials/providers.py#L56)
+[Show source in providers.py:56](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L56)
 
 Check if the credentials are refreshable.
 
@@ -254,7 +263,7 @@ def refreshable(self) -> bool: ...
 
 ## InfisicalCredentialsError
 
-[Show source in providers.py:14](../../src/infisical/credentials/providers.py#L14)
+[Show source in providers.py:14](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L14)
 
 Base class for Infisical credentials errors.
 
@@ -268,7 +277,7 @@ class InfisicalCredentialsError(Exception): ...
 
 ## InfisicalEnvironmentProvider
 
-[Show source in providers.py:182](../../src/infisical/credentials/providers.py#L182)
+[Show source in providers.py:182](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L182)
 
 Provides credentials from environment variables.
 
@@ -290,7 +299,7 @@ class InfisicalEnvironmentProvider(BaseInfisicalProvider): ...
 
 ## InfisicalExplicitProvider
 
-[Show source in providers.py:198](../../src/infisical/credentials/providers.py#L198)
+[Show source in providers.py:198](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L198)
 
 Provides explicitly passed credentials.
 
@@ -309,7 +318,7 @@ class InfisicalExplicitProvider(BaseInfisicalProvider):
 
 ### InfisicalExplicitProvider()._load
 
-[Show source in providers.py:207](../../src/infisical/credentials/providers.py#L207)
+[Show source in providers.py:207](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/credentials/providers.py#L207)
 
 Load credentials from explicitly provided values.
 

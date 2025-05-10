@@ -1,12 +1,16 @@
 # Base
 
-[Infisical HTTPX SDK Documentation](../README.md#infisical-httpx-sdk-documentation) / [Resources](./index.md#resources) / Base
+[Infisical HTTPX SDK Documentation](../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../index.md#infisical) / [Resources](./index.md#resources) / Base
 
-> Auto-generated documentation for [resources.base](../../src/infisical/resources/base.py) module.
+> Auto-generated documentation for [src.infisical.resources.base](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py) module.
+
+- [Base](#base)
+  - [InfisicalAPI](#infisicalapi)
+  - [InfisicalResourceRequest](#infisicalresourcerequest)
 
 ## InfisicalAPI
 
-[Show source in base.py:26](../../src/infisical/resources/base.py#L26)
+[Show source in base.py:26](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py#L26)
 
 Base class for Infisical API resources.
 
@@ -63,7 +67,7 @@ class InfisicalAPI:
 
 ### InfisicalAPI()._format_url
 
-[Show source in base.py:82](../../src/infisical/resources/base.py#L82)
+[Show source in base.py:82](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py#L82)
 
 Generate the full URL for the resource.
 
@@ -75,7 +79,7 @@ def _format_url(self, uri: str) -> str: ...
 
 ### InfisicalAPI().raise_resource_error
 
-[Show source in base.py:94](../../src/infisical/resources/base.py#L94)
+[Show source in base.py:94](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py#L94)
 
 Raise an error for the resource.
 
@@ -87,7 +91,7 @@ def raise_resource_error(self, message: str) -> None: ...
 
 ### InfisicalAPI().verify_required_params
 
-[Show source in base.py:98](../../src/infisical/resources/base.py#L98)
+[Show source in base.py:98](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py#L98)
 
 Verify that the required parameters are present.
 
@@ -110,7 +114,7 @@ def verify_required_params(self, required_params: list[str], params: dict) -> No
 
 ## InfisicalResourceRequest
 
-[Show source in base.py:13](../../src/infisical/resources/base.py#L13)
+[Show source in base.py:13](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/base.py#L13)
 
 Base model for Infisical resource requests.
 

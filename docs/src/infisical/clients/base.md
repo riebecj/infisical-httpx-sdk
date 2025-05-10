@@ -1,12 +1,15 @@
 # Base
 
-[Infisical HTTPX SDK Documentation](../README.md#infisical-httpx-sdk-documentation) / [Clients](./index.md#clients) / Base
+[Infisical HTTPX SDK Documentation](../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../index.md#infisical) / [Clients](./index.md#clients) / Base
 
-> Auto-generated documentation for [clients.base](../../src/infisical/clients/base.py) module.
+> Auto-generated documentation for [src.infisical.clients.base](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py) module.
+
+- [Base](#base)
+  - [BaseClient](#baseclient)
 
 ## BaseClient
 
-[Show source in base.py:23](../../src/infisical/clients/base.py#L23)
+[Show source in base.py:22](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py#L22)
 
 #### Attributes
 
@@ -30,7 +33,7 @@ class BaseClient:
 
 ### BaseClient().__set_apis__
 
-[Show source in base.py:49](../../src/infisical/clients/base.py#L49)
+[Show source in base.py:48](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py#L48)
 
 Set the APIs in a separate dunder method to keep the constructor clean.
 
@@ -42,7 +45,7 @@ def __set_apis__(self) -> None: ...
 
 ### BaseClient()._get_headers
 
-[Show source in base.py:56](../../src/infisical/clients/base.py#L56)
+[Show source in base.py:55](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py#L55)
 
 Generate the headers for the request.
 
@@ -67,7 +70,7 @@ def _get_headers(self, method: HttpxMethod) -> dict: ...
 
 ### BaseClient()._handle_response
 
-[Show source in base.py:85](../../src/infisical/clients/base.py#L85)
+[Show source in base.py:85](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py#L85)
 
 Handle the response from the request.
 
@@ -102,7 +105,7 @@ def _handle_response(
 
 ### BaseClient().create_request
 
-[Show source in base.py:74](../../src/infisical/clients/base.py#L74)
+[Show source in base.py:73](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/base.py#L73)
 
 Abstract method to create a request for the resource.
 

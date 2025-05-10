@@ -2,7 +2,7 @@
 
 > Auto-generated documentation index.
 
-A full list of `infisical-httpx-sdk` project modules.
+A full list of [infisical-httpx-sdk](https://github.com/riebecj/infisical-httpx-sdk) project modules.
 
 Welcome to the **Infisical HTTPX SDK** documentation! This guide provides an overview of the SDK, its usage, and examples to help you integrate it into your projects.
 
@@ -176,6 +176,12 @@ client = InfisicalClient(provider_chain=provider_chain)
 
 ## Contributing
 
+To have your PR accepted, ensure that you follow these guidelines. In a nutshell, here's what's required:
+
+1) It passes `lint` and `test`, and it can `package` successfully.
+2) You have updated the version in accordance with the [versioning](#versioning) guide.
+3) Any changes or additions have [updated docs](#generate-documentation).
+
 ### Getting Started 
 
 Ensure you have Python 3.11 or greater installed.
@@ -249,6 +255,16 @@ It will generate both a `*.whl` and a `*.tar.gz` in the `./dist` directory.
 
 >NOTE: Ensure all three (lint, test, and build) pass before submitting a PR.
 
+### Generate Documentation
+
+To make it easier to find documentation, as well as generate API documentation, this repo uses [handsdown]() to quickly generate docs without having to host it anywhere other than the repository. There's already an aliased `pants` command to do this, so all you have to do is make sure the class/method docstrings are updated correctly and run:
+
+```bash
+rm -rf docs/ && pants run gendocs
+```
+
+This generates the Markdown docs in the `docs` directory of the `main` branch. Those are used when updating the GH Pages site in the publishing workflow. Check out the docs and make sure it looks good before committing.
+
 ### Versioning
 
 I like explicit semantic versioning, so if your PR is a patch or bug fix, increase the PATCH version by 1 in the `pyproject.toml`.
@@ -269,22 +285,23 @@ Infisical is known to deprecate certain API version routes. Should this be the c
 
 ## API Documentation
 
-- [Types](./_types.md#types)
-- [Clients](clients/index.md#clients)
-    - [Base](clients/base.md#base)
-    - [Clients](clients/clients.md#clients)
-- [Credentials](credentials/index.md#credentials)
-    - [Keyring Handler](credentials/keyring_handler.md#keyring-handler)
-    - [Providers](credentials/providers.md#providers)
-- [Exceptions](./exceptions.md#exceptions)
-- [Resources](resources/index.md#resources)
-    - [Base](resources/base.md#base)
-    - [Certificates](resources/certificates/index.md#certificates)
-        - [Api](resources/certificates/api.md#api)
-        - [Models](resources/certificates/models.md#models)
-    - [Folders](resources/folders/index.md#folders)
-        - [Api](resources/folders/api.md#api)
-        - [Models](resources/folders/models.md#models)
-    - [Secrets](resources/secrets/index.md#secrets)
-        - [Api](resources/secrets/api.md#api)
-        - [Models](resources/secrets/models.md#models)
+    - [Infisical](src/infisical/index.md#infisical)
+        - [Types](src/infisical/_types.md#types)
+        - [Clients](src/infisical/clients/index.md#clients)
+            - [Base](src/infisical/clients/base.md#base)
+            - [Clients](src/infisical/clients/clients.md#clients)
+        - [Credentials](src/infisical/credentials/index.md#credentials)
+            - [Keyring Handler](src/infisical/credentials/keyring_handler.md#keyring-handler)
+            - [Providers](src/infisical/credentials/providers.md#providers)
+        - [Exceptions](src/infisical/exceptions.md#exceptions)
+        - [Resources](src/infisical/resources/index.md#resources)
+            - [Base](src/infisical/resources/base.md#base)
+            - [Certificates](src/infisical/resources/certificates/index.md#certificates)
+                - [Api](src/infisical/resources/certificates/api.md#api)
+                - [Models](src/infisical/resources/certificates/models.md#models)
+            - [Folders](src/infisical/resources/folders/index.md#folders)
+                - [Api](src/infisical/resources/folders/api.md#api)
+                - [Models](src/infisical/resources/folders/models.md#models)
+            - [Secrets](src/infisical/resources/secrets/index.md#secrets)
+                - [Api](src/infisical/resources/secrets/api.md#api)
+                - [Models](src/infisical/resources/secrets/models.md#models)

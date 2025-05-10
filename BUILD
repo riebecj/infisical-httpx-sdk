@@ -17,3 +17,13 @@ python_distribution(
         "https://upload.pypi.org/legacy/",
     ],
 )
+
+pex_binary(
+    name="mkdocs",
+    entry_point="mkdocs",
+    args=["build"],
+    dependencies=[
+        ":pyproject#mkdocs-material",
+        "src/infisical:infisical",
+    ],
+)

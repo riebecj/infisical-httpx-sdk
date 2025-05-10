@@ -1,12 +1,16 @@
 # Clients
 
-[Infisical HTTPX SDK Documentation](../README.md#infisical-httpx-sdk-documentation) / [Clients](./index.md#clients) / Clients
+[Infisical HTTPX SDK Documentation](../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../index.md#infisical) / [Clients](./index.md#clients) / Clients
 
-> Auto-generated documentation for [clients.clients](../../src/infisical/clients/clients.py) module.
+> Auto-generated documentation for [src.infisical.clients.clients](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py) module.
+
+- [Clients](#clients)
+  - [InfisicalAsyncClient](#infisicalasyncclient)
+  - [InfisicalClient](#infisicalclient)
 
 ## InfisicalAsyncClient
 
-[Show source in clients.py:102](../../src/infisical/clients/clients.py#L102)
+[Show source in clients.py:104](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L104)
 
 Infisical async HTTPX client.
 
@@ -19,7 +23,7 @@ class InfisicalAsyncClient(BaseClient):
 
 ### InfisicalAsyncClient().__aenter__
 
-[Show source in clients.py:110](../../src/infisical/clients/clients.py#L110)
+[Show source in clients.py:112](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L112)
 
 Enter the context manager and return the HTTPX async client.
 
@@ -31,7 +35,7 @@ async def __aenter__(self) -> Self: ...
 
 ### InfisicalAsyncClient().__aexit__
 
-[Show source in clients.py:114](../../src/infisical/clients/clients.py#L114)
+[Show source in clients.py:116](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L116)
 
 Exit the context manager and close the HTTPX async client.
 
@@ -43,7 +47,7 @@ async def __aexit__(self, exc_type, exc_value, traceback) -> None: ...
 
 ### InfisicalAsyncClient().close
 
-[Show source in clients.py:118](../../src/infisical/clients/clients.py#L118)
+[Show source in clients.py:120](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L120)
 
 Close the HTTPX async client.
 
@@ -55,7 +59,7 @@ async def close(self) -> None: ...
 
 ### InfisicalAsyncClient().create_request
 
-[Show source in clients.py:122](../../src/infisical/clients/clients.py#L122)
+[Show source in clients.py:124](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L124)
 
 Create a Coroutine request for the resource.
 
@@ -84,7 +88,7 @@ def create_request(
 
 ### InfisicalAsyncClient().handle_request
 
-[Show source in clients.py:163](../../src/infisical/clients/clients.py#L163)
+[Show source in clients.py:165](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L165)
 
 Handle the asynchronous request.
 
@@ -114,7 +118,7 @@ async def handle_request(
 
 ## InfisicalClient
 
-[Show source in clients.py:14](../../src/infisical/clients/clients.py#L14)
+[Show source in clients.py:14](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L14)
 
 Infisical HTTPX client.
 
@@ -127,7 +131,7 @@ class InfisicalClient(BaseClient):
 
 ### InfisicalClient().__enter__
 
-[Show source in clients.py:22](../../src/infisical/clients/clients.py#L22)
+[Show source in clients.py:22](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L22)
 
 Enter the context manager and return the HTTPX client.
 
@@ -139,7 +143,7 @@ def __enter__(self) -> Self: ...
 
 ### InfisicalClient().__exit__
 
-[Show source in clients.py:26](../../src/infisical/clients/clients.py#L26)
+[Show source in clients.py:26](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L26)
 
 Exit the context manager and close the HTTPX client.
 
@@ -151,7 +155,7 @@ def __exit__(self, exc_type, exc_value, traceback) -> None: ...
 
 ### InfisicalClient().close
 
-[Show source in clients.py:30](../../src/infisical/clients/clients.py#L30)
+[Show source in clients.py:30](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L30)
 
 Close the HTTPX client.
 
@@ -163,7 +167,7 @@ def close(self) -> None: ...
 
 ### InfisicalClient().create_request
 
-[Show source in clients.py:34](../../src/infisical/clients/clients.py#L34)
+[Show source in clients.py:34](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L34)
 
 Create an anonymous function request for the resource.
 
@@ -192,7 +196,7 @@ def create_request(
 
 ### InfisicalClient().handle_request
 
-[Show source in clients.py:80](../../src/infisical/clients/clients.py#L80)
+[Show source in clients.py:80](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/clients/clients.py#L80)
 
 Handle the synchronous request.
 

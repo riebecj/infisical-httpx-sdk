@@ -61,3 +61,44 @@ jobs:
       with:
         repository-url: https://test.pypi.org/legacy/
         verbose: true
+  update-docs:
+    name: Update Docs
+    needs:
+    - publish-to-testpypi
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: docs
+    - name: Configure Pants caching to GitHub Actions Cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('PANTS_REMOTE_STORE_ADDRESS', process.env.ACTIONS_CACHE_URL);
+          core.exportVariable('PANTS_REMOTE_OAUTH_BEARER_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN);
+    - name: Set up Python
+      id: python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    - name: Setup git
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "github-actions"
+    - name: Fetch changes from main
+      run: |
+        git fetch origin main:docs
+        git checkout docs
+    - name: Install Pants
+      run: |
+        curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+    - name: Build Docs Site
+      run: |
+        rm -rf docsmd/
+        mv docs/ docsmd/
+        pants run mkdocs
+    - name: Commit docs
+      run: |
+        git add docs docsmd
+        git commit -m "Update docs"
+        git push -f

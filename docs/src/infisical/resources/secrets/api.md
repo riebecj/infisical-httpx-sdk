@@ -1,12 +1,16 @@
 # Api
 
-[Infisical HTTPX SDK Documentation](../../README.md#infisical-httpx-sdk-documentation) / [Resources](../index.md#resources) / [Secrets](./index.md#secrets) / Api
+[Infisical HTTPX SDK Documentation](../../../../README.md#infisical-httpx-sdk-documentation) / `src` / [Infisical](../../index.md#infisical) / [Resources](../index.md#resources) / [Secrets](./index.md#secrets) / Api
 
-> Auto-generated documentation for [resources.secrets.api](../../../src/infisical/resources/secrets/api.py) module.
+> Auto-generated documentation for [src.infisical.resources.secrets.api](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py) module.
+
+- [Api](#api)
+  - [Secrets](#secrets)
+  - [SecretsV3](#secretsv3)
 
 ## Secrets
 
-[Show source in api.py:102](../../../src/infisical/resources/secrets/api.py#L102)
+[Show source in api.py:102](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L102)
 
 Infisical Secrets Resource.
 
@@ -21,7 +25,7 @@ class Secrets:
 
 ## SecretsV3
 
-[Show source in api.py:20](../../../src/infisical/resources/secrets/api.py#L20)
+[Show source in api.py:20](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L20)
 
 Infisical Secrets v3 API.
 
@@ -34,7 +38,7 @@ class SecretsV3(InfisicalAPI):
 
 ### SecretsV3().create
 
-[Show source in api.py:29](../../../src/infisical/resources/secrets/api.py#L29)
+[Show source in api.py:29](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L29)
 
 Create a new secret.
 
@@ -46,7 +50,7 @@ def create(self, request: CreateSecretRequest) -> Secret: ...
 
 ### SecretsV3().delete
 
-[Show source in api.py:40](../../../src/infisical/resources/secrets/api.py#L40)
+[Show source in api.py:40](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L40)
 
 Delete a secret.
 
@@ -58,7 +62,7 @@ def delete(self, request: DeleteSecretRequest) -> Secret: ...
 
 ### SecretsV3().list
 
-[Show source in api.py:54](../../../src/infisical/resources/secrets/api.py#L54)
+[Show source in api.py:54](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L54)
 
 List all secrets.
 
@@ -77,7 +81,7 @@ def list(self, **params: Unpack[ListSecretsQueryParams]) -> SecretsList: ...
 
 ### SecretsV3().retrieve
 
-[Show source in api.py:74](../../../src/infisical/resources/secrets/api.py#L74)
+[Show source in api.py:74](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L74)
 
 Retrieve a secret by Name.
 
@@ -93,7 +97,7 @@ def retrieve(self, name: str, **params: Unpack[RetrieveSecretQueryParams]) -> Se
 
 ### SecretsV3().update
 
-[Show source in api.py:87](../../../src/infisical/resources/secrets/api.py#L87)
+[Show source in api.py:87](https://github.com/riebecj/infisical-httpx-sdk/blob/main/src/infisical/resources/secrets/api.py#L87)
 
 Update a secret.
 

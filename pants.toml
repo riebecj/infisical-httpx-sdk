@@ -17,7 +17,8 @@ enabled = false
 all = "::"
 lock = "generate-lockfiles"
 venv = "export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default"
-generate-docs = ":pyproject#handsdown -- -n infisical-httpx-sdk  -t material -i src/infisical"
+gendocs = ":pyproject#handsdown -- --external git@github.com:riebecj/infisical-httpx-sdk.git -n infisical-httpx-sdk --branch main --toc-depth 2"
+mkdocs = ":mkdocs"
 
 [source]
 root_patterns = [

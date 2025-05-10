@@ -174,6 +174,12 @@ client = InfisicalClient(provider_chain=provider_chain)
 
 ## Contributing
 
+To have your PR accepted, ensure that you follow these guidelines. In a nutshell, here's what's required:
+
+1) It passes `lint` and `test`, and it can `package` successfully.
+2) You have updated the version in accordance with the [versioning](#versioning) guide.
+3) Any changes or additions have [updated docs](#generate-documentation).
+
 ### Getting Started 
 
 Ensure you have Python 3.11 or greater installed.
@@ -246,6 +252,16 @@ pants package all
 It will generate both a `*.whl` and a `*.tar.gz` in the `./dist` directory.
 
 >NOTE: Ensure all three (lint, test, and build) pass before submitting a PR.
+
+### Generate Documentation
+
+To make it easier to find documentation, as well as generate API documentation, this repo uses [handsdown]() to quickly generate docs without having to host it anywhere other than the repository. There's already an aliased `pants` command to do this, so all you have to do is make sure the class/method docstrings are updated correctly and run:
+
+```bash
+rm -rf docs/ && pants run gendocs
+```
+
+This generates the Markdown docs in the `docs` directory of the `main` branch. Those are used when updating the GH Pages site in the publishing workflow. Check out the docs and make sure it looks good before committing.
 
 ### Versioning
 
