@@ -57,7 +57,8 @@ class TestClientsCommon:
 
     @pytest.mark.parametrize("method", ["get", "post", "put", "delete", "patch"])
     @pytest.mark.parametrize("client", [InfisicalClient, InfisicalAsyncClient])
-    def test_create_request(self, client, method):
+    @patch(f"{BaseClient.__module__}.InfisicalCredentialProviderChain")
+    def test_create_request(self, _, client, method):
         test_client: BaseClient = client()
         expected = Callable if isinstance(test_client.client, httpx.Client) else Coroutine
         result = test_client.create_request(method=method, url="https://test.example", params={"foo": "bar"}, body={"foo": "bar"})
@@ -72,7 +73,8 @@ class TestClientsCommon:
         (200, {"nested": {"val": "test"}}, {"nested": MockResponse}, MockResponse(val="test")),
     ])
     @pytest.mark.parametrize("client", [InfisicalClient, InfisicalAsyncClient])
-    def test_handle_response(self, client, status_code, json, expected_responses, expected, mock_response):
+    @patch(f"{BaseClient.__module__}.InfisicalCredentialProviderChain")
+    def test_handle_response(self, _, client, status_code, json, expected_responses, expected, mock_response):
         test_client: BaseClient = client()
         response: httpx.Response = mock_response(status_code=status_code, json=json)
 
