@@ -104,5 +104,5 @@ jobs:
     - name: Commit docs
       run: |
         git add docs docsmd
-        git commit -m "Update GitHub Pages""
+        git commit -m "Update GitHub Pages"
         git push origin docs -f
