@@ -3,6 +3,12 @@ repo_url: "https://github.com/riebecj/infisical-httpx-sdk"
 site_dir: "docs"
 docs_dir: "docsmd"
 
+nav:
+  - Home: README.md
+  - Clients: src/infisical/clients/clients.md
+  - Credential Providers: src/infisical/credentials/providers.md
+  - Resource APIs: src/infisical/resources/index.md
+
 theme:
   name: material
   icon:
@@ -10,22 +16,32 @@ theme:
   include_sidebar: true
   palette:
     - scheme: default
+      media: "(prefers-color-scheme: light)"
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
     - scheme: slate
+      media: "(prefers-color-scheme: dark)"
       primary: blue
       accent: blue
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
   features:
-    - navigation.expand
+    - navigation.top
+    - navigation.tabs
     - navigation.instant
     - navigation.tracking
     - content.code.annotate
 markdown_extensions:
   - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      title: On this page
+      permalink: true
+      toc_depth: 3
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true 

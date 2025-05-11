@@ -6,28 +6,11 @@ A full list of [infisical-httpx-sdk](https://github.com/riebecj/infisical-httpx-
 
 Welcome to the **Infisical HTTPX SDK** documentation! This guide provides an overview of the SDK, its usage, and examples to help you integrate it into your projects.
 
-## Table of Contents
-
-1. [Clients](#clients)
-    - [Create a client](#create-a-client)
-    - [Authenticating a client](#authenticating-a-client)
-    - [Call an API Resource](#call-an-api-resource)
-2. [Credential Providers](#credential-providers)
-    - [Explicit](#explicit-credentials)
-    - [Environment Variables](#environment-variables)
-    - [Infisical Config](#infisical-config)
-    - [Custom](#custom-provider)
-3. [Contributing](#contributing)
-    - [Getting Started](#getting-started)
-    - [Dependencies](#adding-or-updating-dependencies)
-    - [Lint, Test, and Build](#lint-test-and-build)
-    - [Versioning](#versioning)
-    - [Deprecated API Routes](#deprecated-api-routes)
-4. [API Documentation](#api-documentation)
-
 ---
 
 ## Clients
+
+Since this SDK uses HTTPX for HTTP transport, it support both synchronous and asynchronous clients. Continue reading to learn more about how to create and use the clients.
 
 ### Create A Client
 

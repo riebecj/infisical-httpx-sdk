@@ -8,6 +8,11 @@ files(
     sources=["pyproject.toml", "README.md", "LICENSE"],
 )
 
+file(
+    name="mkdocs-config",
+    source="mkdocs.yml",
+)
+
 python_distribution(
     name="infisical-httpx-sdk",
     dependencies=["src/infisical", ":build_files"],
@@ -25,5 +30,6 @@ pex_binary(
     dependencies=[
         ":pyproject#mkdocs-material",
         "src/infisical:infisical",
+        ":mkdocs-config",
     ],
 )
