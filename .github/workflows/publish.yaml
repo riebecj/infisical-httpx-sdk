@@ -40,31 +40,31 @@ jobs:
       with:
         name: python-package-distributions
         path: dist/infisical_httpx_sdk-*
-  publish-to-testpypi:
-    name: Publish to TestPyPI
-    needs:
-    - build
-    runs-on: ubuntu-latest
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/infisical-httpx-sdk
-    permissions:
-      id-token: write  # IMPORTANT: mandatory for trusted publishing
-    steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Publish distribution 📦 to TestPyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        repository-url: https://test.pypi.org/legacy/
-        verbose: true
+  # publish-to-testpypi:
+  #   name: Publish to TestPyPI
+  #   needs:
+  #   - build
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: testpypi
+  #     url: https://test.pypi.org/p/infisical-httpx-sdk
+  #   permissions:
+  #     id-token: write  # IMPORTANT: mandatory for trusted publishing
+  #   steps:
+  #   - name: Download all the dists
+  #     uses: actions/download-artifact@v4
+  #     with:
+  #       name: python-package-distributions
+  #       path: dist/
+  #   - name: Publish distribution 📦 to TestPyPI
+  #     uses: pypa/gh-action-pypi-publish@release/v1
+  #     with:
+  #       repository-url: https://test.pypi.org/legacy/
+  #       verbose: true
   update-docs:
     name: Update Docs
-    needs:
-    - publish-to-testpypi
+    # needs:
+    # - publish-to-testpypi
     runs-on: ubuntu-latest
     permissions:
       contents: write
