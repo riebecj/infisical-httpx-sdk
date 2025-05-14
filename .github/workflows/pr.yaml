@@ -51,5 +51,7 @@ jobs:
     - name: Generate Docs
       run: |
         curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+        pants venv
+        source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
         pants run gendocs
         pants run mkdocs
