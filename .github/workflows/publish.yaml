@@ -115,6 +115,8 @@ jobs:
     - name: Build Docs Site
       run: |
         rm -rf docs/ gh-pages/
+        pants venv
+        source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
         pants run gendocs
         pants run mkdocs
     - name: Commit docs
