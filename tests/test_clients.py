@@ -53,7 +53,7 @@ class TestClientsCommon:
         }
         if method != "get":
             expected_headers["Content-Type"] = "application/json"
-        assert test_client._get_headers(method) == expected_headers
+        assert test_client.__get_headers__(method) == expected_headers
 
     @pytest.mark.parametrize("method", ["get", "post", "put", "delete", "patch"])
     @pytest.mark.parametrize("client", [InfisicalClient, InfisicalAsyncClient])
@@ -80,9 +80,9 @@ class TestClientsCommon:
 
         if isinstance(expected, type(Exception)):
             with pytest.raises(expected):
-                test_client._handle_response(response=response, expected_responses=expected_responses)
+                test_client.__handle_response__(response=response, expected_responses=expected_responses)
         else:
-            assert test_client._handle_response(response=response, expected_responses=expected_responses) == expected
+            assert test_client.__handle_response__(response=response, expected_responses=expected_responses) == expected
 
 
 class TestInfisicalClient:
@@ -107,7 +107,7 @@ class TestInfisicalClient:
                 raise ValueError(f"Invalid method: {method}")
 
         with InfisicalClient() as client:
-            client._handle_response = mock_handle_response
+            client.__handle_response__ = mock_handle_response
             test_request = client.create_request(method=method, url="https://test.example", params={"foo": "bar"}, body={"foo": "bar"})
             client.handle_request(request=test_request, expected_responses={})
         
@@ -144,7 +144,7 @@ class TestInfisicalAsyncClient:
                 raise ValueError(f"Invalid method: {method}")
 
         async with InfisicalAsyncClient() as client:
-            client._handle_response = mock_handle_response
+            client.__handle_response__ = mock_handle_response
             test_request = client.create_request(method=method, url="https://test.example", params={"foo": "bar"}, body={"foo": "bar"})
             await client.handle_request(request=test_request, expected_responses={})
         

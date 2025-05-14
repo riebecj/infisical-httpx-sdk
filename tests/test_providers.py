@@ -121,7 +121,7 @@ class TestInfisicalProviders:
 
 class TestInfisicalCredentialProviderChain:
     class MockProvider(BaseInfisicalProvider):
-        def _load(self):
+        def __load__(self):
             pass
         
     def test_add_provider(self):

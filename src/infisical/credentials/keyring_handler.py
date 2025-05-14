@@ -20,46 +20,51 @@ class FileKeyringBackend(KeyringBackend):
     JWE token for the logged-in user.
 
     Attributes:
-        CONFIG_PATH (Path): The path to the Infisical configuration file.
-        KEYRING_PATH (Path): The path to the keyring file for the logged-in user.
+        CONFIG_FILE (Path): The path to the Infisical configuration file: `~/.infisical/infisical-config.json`.
+        KEYRING_PATH (Path): The path to the keyring directory: `~/infisical-keyring`.
     """
 
-    CONFIG_PATH = Path.home() / ".infisical" / "infisical-config.json"
+    CONFIG_FILE = Path.home() / ".infisical" / "infisical-config.json"
     KEYRING_PATH = Path.home() / "infisical-keyring"
 
     @property
     def priority(self) -> float:
         """Returns the priority of this keyring backend.
 
-        Not really used, but required by the KeyringBackend interface.
+        Not really used, but required by the
+        [KeyringBackend](https://github.com/jaraco/keyring/blob/main/keyring/backend.py#L65) interface.
 
         Returns:
-            float: The priority of this keyring backend, set to 69 for fun.
+            float: The priority of this keyring backend.
         """
         return 69
 
     @cached_property
     def config(self) -> dict:
-        """Read and cache the Infisical configuration file."""
-        if self.CONFIG_PATH.exists():
-            with self.CONFIG_PATH.open("rt") as config_file:
+        """Read, cache, and return the value of `CONFIG_FILE`."""
+        if self.CONFIG_FILE.exists():
+            with self.CONFIG_FILE.open("rt") as config_file:
                 return json.load(config_file)
         return {}
 
     def get_password(self, _: str = "", __: str = "") -> str:
         """Retrieve a password from the keyring.
 
-        The arguments are not used in this implementation, as the keyring
-        is designed to store a single JWE token for the logged-in user, but
-        they are required by the KeyringBackend interface.
+        The arguments are not used in this implementation, as the keyring is designed to store a single
+        JWE token for the logged-in user, but they are required by the
+        [KeyringBackend](https://github.com/jaraco/keyring/blob/main/keyring/backend.py#L65) interface.
 
-        This method reads the Infisical configuration file and retrieves the JWE token
-        stored in the keyring file for the logged-in user. If the configuration file does
-        not exist, is misconfigured, or the vault backend type is not 'file', it returns an
-        empty string.
+        This method checks the [config][(c).], initially checking the `vaultBackendType` is set to `'file``. It then
+        checks that the `vaultBackendPassphrase` and `loggedInUserEmail` fields are present. Then it verifies the
+        `loggedInUserEmail`'s keyring file exists. If all these checks pass, it reads and decrypts the JWE token from
+        the keyring file and returns the JWT token contained within it. If any of these checks fail, it returns an empty
+        string.
+
+        Warnings:
+            UserWarning: If the vault backend type is not `'file'`.
 
         Returns:
-            str: The JWT token from the decrypted JWE token if available, otherwise an empty string.
+            (str): The JWT token from the decrypted JWE token if available, otherwise an empty string.
         """
         if self.config.get("vaultBackendType") != "file":
             # Later versions might support other vault backends, but for now we only support 'file'.
@@ -87,7 +92,11 @@ class FileKeyringBackend(KeyringBackend):
         return json.loads(json.loads(payload.decode()))["JTWToken"]  # Yes, it's mis-spelled in Infisical's JWE.
 
     def get_url(self) -> str:
-        """Get the URL of the logged-in user."""
+        """Get the URL of the logged-in user.
+
+        Returns:
+            (str): The URL set in `LoggedInUserDomain` in the [config][(c).] file.
+        """
         endpoint: str = self.config["LoggedInUserDomain"]
         if endpoint and endpoint.endswith("/api"):
             return endpoint[:-4]  # Remove the trailing '/api' if present.
@@ -96,13 +105,18 @@ class FileKeyringBackend(KeyringBackend):
     def set_password(self, service: str, username: str, password: str) -> None:
         """NOT USED.
 
-        This method is not implemented as the keyring is designed to retrieve
-        a single JWE token for the logged-in user, and setting passwords is not
-        supported in this implementation.
+        !!! warning
+
+            This method is not implemented as the keyring is designed to retrieve
+            a single JWE token for the logged-in user, and setting passwords is not
+            supported in this implementation.
 
         Args:
             service: Unused argument.
             username: Unused argument.
             password: Unused argument.
+
+        Raises:
+            NotImplementedError: This method is not implemented.
         """
         raise NotImplementedError

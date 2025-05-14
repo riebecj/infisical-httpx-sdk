@@ -29,6 +29,23 @@ pex_binary(
     args=["build"],
     dependencies=[
         ":pyproject#mkdocs-material",
+        ":pyproject#mkdocstrings",
+        ":pyproject#mkdocstrings-python-xref",
+        ":pyproject#ruff",
+        "src/infisical:infisical",
+        ":mkdocs-config",
+    ],
+)
+
+pex_binary(
+    name="mkdocs-serve",
+    entry_point="mkdocs",
+    args=["serve"],
+    dependencies=[
+        ":pyproject#mkdocs-material",
+        ":pyproject#mkdocstrings",
+        ":pyproject#mkdocstrings-python-xref",
+        ":pyproject#ruff",
         "src/infisical:infisical",
         ":mkdocs-config",
     ],

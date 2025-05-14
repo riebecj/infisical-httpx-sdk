@@ -13,7 +13,7 @@ class TestFileKeyringBackend:
 
     def test_config(self):
         keyring_handler = FileKeyringBackend()
-        keyring_handler.CONFIG_PATH = Path("non_existent_path")
+        keyring_handler.CONFIG_FILE = Path("non_existent_path")
         assert isinstance(keyring_handler.config, dict)
         assert not keyring_handler.config  # Ensure config is empty
 
@@ -24,7 +24,7 @@ class TestFileKeyringBackend:
                 "keyring_password": "test_password"
             }))
             temp_file.seek(0)
-            keyring_handler.CONFIG_PATH = Path(temp_file.name)
+            keyring_handler.CONFIG_FILE = Path(temp_file.name)
             assert isinstance(keyring_handler.config, dict)
             assert keyring_handler.config
             assert "logged_in_user" in keyring_handler.config
@@ -54,7 +54,7 @@ class TestFileKeyringBackend:
                 with Path(f"{temp_dir}/{user or 'foo'}").open("+wt") as keyring_file:
                     keyring_file.write(generate_jwe(passphrase, {"JTWToken": "test_token"}))
 
-            keyring_handler.CONFIG_PATH = Path(temp_file.name)
+            keyring_handler.CONFIG_FILE = Path(temp_file.name)
             keyring_handler.KEYRING_PATH = Path(temp_dir)
 
             if backend == "auto":
@@ -71,7 +71,7 @@ class TestFileKeyringBackend:
         with tempfile.NamedTemporaryFile(mode="+wt") as temp_file:
             temp_file.write(json.dumps({"LoggedInUserDomain": url}))
             temp_file.seek(0)
-            keyring_handler.CONFIG_PATH = Path(temp_file.name)
+            keyring_handler.CONFIG_FILE = Path(temp_file.name)
             assert keyring_handler.get_url()
             assert not keyring_handler.get_url().endswith("/api")
 

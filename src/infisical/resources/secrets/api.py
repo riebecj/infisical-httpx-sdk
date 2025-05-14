@@ -18,16 +18,29 @@ from .models import (
 
 
 class SecretsV3(InfisicalAPI):
-    """Infisical Secrets v3 API."""
+    """Infisical Secrets v3 API.
+
+    Attributes:
+        base_uri (str): `/v3/secrets`
+    """
 
     base_uri: Final = "/v3/secrets"
 
     def __init__(self, client: SyncOrAsyncClient) -> None:
-        """Initialize the Infisical Secrets Resource."""
+        """Initialize the Infisical Secrets Resource.
+
+        Args:
+            client (SyncOrAsyncClient): An initialized [InfisicalClient][src.infisical.clients.clients.] or
+                [InfisicalAsyncClient][src.infisical.clients.clients.].
+        """
         super().__init__(client=client)
 
     def create(self, request: CreateSecretRequest) -> Secret:
-        """Create a new secret."""
+        """Create a new secret.
+
+        Args:
+            request (CreateSecretRequest): The request object containing secret details.
+        """
         self.logger.info("Creating secret %s", request.name)
         url = self._format_url(f"/raw/{request.name}")
         _request = self.client.create_request(
@@ -38,7 +51,11 @@ class SecretsV3(InfisicalAPI):
         return self.client.handle_request(request=_request, expected_responses={"secret": Secret})
 
     def delete(self, request: DeleteSecretRequest) -> Secret:
-        """Delete a secret."""
+        """Delete a secret.
+
+        Args:
+            request (DeleteSecretRequest): The request object containing secret ID or name.
+        """
         self.logger.info("Deleting secret %s", request.name)
         url = self._format_url(f"/raw/{request.name}")
         _request = self.client.create_request(
@@ -58,7 +75,12 @@ class SecretsV3(InfisicalAPI):
         The `secretPath` parameter is optional and can be used to filter the secrets by a specific path. If `recursive`
         is not set to true, which the default is `false`, the list of secrets will be only those in the `secretPath`.
 
-        NOTE: The `viewSecretValue` param is permanently set to `false` to avoid exposing secret values when listing.
+        Args:
+            **params: (ListSecretsQueryParams): The query parameters for the request.
+
+        !!! note
+
+            The `viewSecretValue` param is permanently set to `false` to avoid exposing secret values when listing.
             This is by design and is not configurable. If you need to get a secret value, use the `retrieve` method.
         """
         self.logger.info("Listing secrets with params %s", params)
@@ -100,8 +122,17 @@ class SecretsV3(InfisicalAPI):
 
 
 class Secrets:
-    """Infisical Secrets Resource."""
+    """Infisical Secrets Resource.
+
+    Attributes:
+        v3 (SecretsV3): The Infisical Secrets v3 API.
+    """
 
     def __init__(self, client: SyncOrAsyncClient) -> None:
-        """Initialize the Infisical Secrets Resource."""
+        """Initialize the Infisical Secrets Resource.
+
+        Args:
+            client (SyncOrAsyncClient): An initialized [InfisicalClient][src.infisical.clients.clients.] or
+                [InfisicalAsyncClient][src.infisical.clients.clients.].
+        """
         self.v3 = SecretsV3(client=client)
