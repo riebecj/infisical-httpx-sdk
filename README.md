@@ -232,7 +232,7 @@ pants lint all
 
 >NOTE: The `all` argument is just an alias for `::` in pants, which means all targets. I use this alias as it makes things a bit easier to understand.
 
-If you run into any formatting or linting errors caught by [ruff](https://docs.astral.sh/ruff/), you can fix what is automatically fixable via
+If you run into any formatting or linting errors caught by `ruff`, you can fix what is automatically fixable via
 
 ```bash
 pants fix all
