@@ -107,13 +107,10 @@ jobs:
     - name: Fetch changes from main
       run: |
         git checkout docs
-        git fetch origin main
-        git reset --hard FETCH_HEAD
-    - name: Install Pants
-      run: |
-        curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+        git reset --hard origin/main
     - name: Build Docs Site
       run: |
+        curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
         rm -rf docs/ gh-pages/
         pants venv
         source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
