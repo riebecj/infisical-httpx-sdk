@@ -1,14 +1,68 @@
 site_name: "infisical-httpx-sdk"
 repo_url: "https://github.com/riebecj/infisical-httpx-sdk"
 site_dir: "docs"
-docs_dir: "docsmd"
+docs_dir: "gh-pages"
+
+watch:
+  - src/infisical
+
+extra_css:
+  - stylesheet.css
 
 nav:
   - Home: README.md
-  - Clients: src/infisical/clients/clients.md
-  - Credential Providers: src/infisical/credentials/providers.md
-  - Resource APIs: src/infisical/resources/index.md
+  - Clients: 
+    - Base: src/infisical/clients/base.md
+    - Sync/Async: src/infisical/clients/clients.md
+  - Credentials:
+    - Providers: src/infisical/credentials/providers.md
+    - Keyring: src/infisical/credentials/keyring_handler.md 
+  - Resource APIs:
+    - Base: src/infisical/resources/base.md
+    - Secrets: src/infisical/resources/secrets/index.md
+    - Folders: src/infisical/resources/folders/index.md
+    - Certificates: src/infisical/resources/certificates/index.md
+  - Exceptions: src/infisical/exceptions.md
+  - Types: src/infisical/_types.md
 
+plugins:
+- mkdocstrings:
+    default_handler: python_xref
+    handlers:
+      python_xref:
+        import:
+        - https://docs.python.org/3/objects.inv
+        options:
+          docstring_style: google
+          show_bases: true
+          heading_level: 2
+          summary: false
+          ignore_init_summary: false
+          show_root_heading: false
+          show_root_toc_entry: false
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          inherited_members: true
+          members_order: source
+          show_labels: true
+          show_docstring_modules: false
+          show_docstring_attributes: true
+          show_docstring_examples: true
+          show_docstring_parameters: true
+          show_docstring_raises: true
+          show_docstring_returns: true
+          show_docstring_warns: true
+          show_docstring_yields: true
+          annotations_path: brief
+          show_signature_annotations: true
+          line_length: 80
+          separate_signature: true
+          show_signature: true
+          signature_crossrefs: true
+          unwrap_annotated: true
+          relative_crossrefs: true
+          check_crossrefs: yes
+          
 theme:
   name: material
   icon:

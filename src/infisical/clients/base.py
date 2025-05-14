@@ -1,4 +1,4 @@
-"""Infisical SDk HTTPX clients."""
+"""Infisical Base Client Module."""
 
 import logging
 import os
@@ -16,16 +16,17 @@ from infisical.resources.certificates.api import Certificates
 from infisical.resources.folders.api import Folders
 from infisical.resources.secrets.api import Secrets
 
-HttpxMethod = Literal["get", "post", "put", "delete", "patch"]
-
 
 class BaseClient:
-    """Infisical SDK Base Client.
+    """Base Client for Infisical HTTPX clients.
 
-    This is the base class for both the synchronous and asynchronous clients. It handles the common functionality
+    This is the base class for [InfisicalClient][src.infisical.clients.clients.] and
+    [InfisicalAsyncClient][src.infisical.clients.clients.] that handles the common functionality
     between the two clients, such as creating requests, handling responses, and managing the credentials.
-    It is not meant to be used directly, but rather as a base class for the `InfisicalClient` and `InfisicalAsyncClient`
-    classes.
+
+    !!! warning
+
+        ***DO NOT*** use this class directly.
     """
 
     # These are not a true class properties, but rather a placeholders to satisfy the type checker and provide a
@@ -36,33 +37,65 @@ class BaseClient:
     secrets: Secrets
 
     def __init__(self, **kwargs: Unpack[InfisicalClientParams]) -> None:
-        """Initialize the Infisical Client."""
+        """Initialize with any [optional parameter][src.infisical._types.InfisicalClientParams]."""
         self._verify_ssl = kwargs.pop("verify_ssl", True)
         self._follow_redirects = kwargs.pop("follow_redirects", False)
         os.environ["INFISICAL_VERIFY_SSL"] = str(self._verify_ssl)  # Set it for the provider chain
-        self._credentials = kwargs.pop("provider_chain", InfisicalCredentialProviderChain(**kwargs)).resolve()
+        self._credentials = kwargs.pop(
+            "provider_chain",
+            InfisicalCredentialProviderChain(self._provider_chain_kwargs(**kwargs)),
+        ).resolve()
         self.url = self._credentials.url
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.__set_apis__()
+        self._set_apis()
 
-    def __set_apis__(self) -> None:
-        """Set the APIs in a separate dunder method to keep the constructor clean."""
+    def _provider_chain_kwargs(self, **kwargs: dict) -> dict[str, str]:
+        """Return the kwargs in a format that can be passed to the provider chain.
+
+        Args:
+            **kwargs: The subset of `InfisicalClientParams` keyword arguments to pass to the provider chain.
+
+        Returns:
+            dict[str, str]: The kwargs containing `url`, `token`, `client_id`, and `client_secret`. If not provided,
+            the values will be empty strings.
+        """
+        return {
+            "url": kwargs.get("endpoint", ""),
+            "token": kwargs.get("token", ""),
+            "client_id": kwargs.get("client_id", ""),
+            "client_secret": kwargs.get("client_secret", ""),
+        }
+
+    def _set_apis(self) -> None:
+        """Set the APIs in a separate dunder method to keep the constructor clean.
+
+        You will find a list of the APIs in the `Attributes` table of
+        """
         self.logger.debug("Setting up APIs")
         self.certificates = Certificates(self)
         self.folders = Folders(self)
         self.secrets = Secrets(self)
 
-    def _get_headers(self, method: HttpxMethod) -> dict:
+    def __get_headers__(self, method: Literal["get", "post", "put", "delete", "patch"]) -> dict[str, str]:
         """Generate the headers for the request.
 
         The headers will include the `Authorization` header with the bearer token and the `Content-Type` header if
         the method is not a GET request. The `Authorization` header will be set to the token from the credentials
-        acquired from the `InfisicalCredentialProviderChain`. We call `get_token()` every time to ensure we get a
-        valid token, as there is refresh logic in the credential object to handle token expiration.
+        acquired from the [InfisicalCredentialProviderChain][src.infisical.credentials.providers.]. We call
+        `get_token()` every time to ensure we get a valid token, as there is refresh logic in the credential object
+        to handle token expiration.
 
-        NOTE: Token refreshing only happens if the credentials acquired are Universal Auth credentials (Client ID and
-        Secret). If the credentials are not Universal Auth credentials, the token cannot be refreshed and expiration
-        will raise an exception.
+        ???+ tip
+
+            Token refreshing only happens if the credentials acquired are Universal Auth credentials (Client ID and
+            Secret). If the credentials are not Universal Auth credentials, the token cannot be refreshed and expiration
+            will raise an exception.
+
+        Args:
+            method (HttpxMethod): The HTTP method for the request.
+
+        Returns:
+            dict[str, str]: The headers for the request.
         """
         self.logger.debug("Generating headers for request method: %s", method)
         headers = {"Authorization": f"Bearer {self._credentials.get_token()}", "Accept": "application/json"}
@@ -73,16 +106,20 @@ class BaseClient:
     @abstractmethod
     def create_request(
         self,
-        method: HttpxMethod,
+        method: Literal["get", "post", "put", "delete", "patch"],
         url: str,
         params: dict | None = None,
         body: dict | None = None,
     ) -> Callable | Coroutine:
-        """Abstract method to create a request for the resource."""
+        """Abstract method to create a request for the resource.
+
+        Raises:
+            NotImplementedError: This method should be implemented in the subclass.
+        """
         msg = "This method should be implemented in the subclass."
         raise NotImplementedError(msg)
 
-    def _handle_response(
+    def __handle_response__(
         self,
         response: httpx.Response,
         expected_responses: dict[str, BaseModel] | None = None,
@@ -90,8 +127,8 @@ class BaseClient:
         """Handle the response from the request.
 
         The response object will raise an exception if the status code is not 2xx. If the status code is 4xx or 5xx,
-        it will raise an `InfisicalHTTPError` stacked with the `httpx.HTTPStatusError`. We will parse error response
-        JSON to provide more context about the error.
+        it will raise an [InfisicalHTTPError][src.infisical.exceptions.] stacked with the `httpx.HTTPStatusError`.
+        We will parse error response JSON to provide more context about the error.
 
         If the status code is 2xx, it will validate the response JSON against the expected responses, which is a dict
         of response JSON keys to their corresponding models. If the key is an empty string, it will validate the
@@ -102,9 +139,13 @@ class BaseClient:
             response (httpx.Response): The response object from the request.
             expected_responses (dict[str, BaseModel]): A dict of response JSON keys to their corresponding models.
 
+        Raises:
+            InfisicalHTTPError: If the status code is not 2xx.
+            ValueError: If none of the keys are found in the response JSON.
+
         Returns:
-            BaseModel: The validated response model.
-            Any: The raw response JSON if no expected responses are provided.
+            (BaseModel): The validated response model.
+            (Any): The raw response JSON if no expected responses are provided.
         """
         self.logger.debug("Handling response with status code %s", response.status_code)
         try:

@@ -60,10 +60,28 @@ jobs:
       with:
         repository-url: https://test.pypi.org/legacy/
         verbose: true
+  publish-to-pypi:
+    name: Publish to PyPI
+    needs:
+    - publish-to-testpypi
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/infisical-httpx-sdk
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
   update-docs:
     name: Update Docs
     needs:
-    - publish-to-testpypi
+    - publish-to-pypi
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -96,72 +114,13 @@ jobs:
         curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
     - name: Build Docs Site
       run: |
-        rm -rf docsmd/ README.md
-        mv docs/ docsmd/
-        mv HANDSDOWN.md README.md
+        rm -rf docs/ gh-pages/
+        pants venv
+        source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
+        pants run gendocs
         pants run mkdocs
     - name: Commit docs
       run: |
-        git add docs docsmd
+        git add docs
         git commit -m "Update GitHub Pages"
         git push origin docs -f
-  publish-to-pypi:
-    name: Publish to PyPI
-    needs:
-    - publish-to-testpypi
-    runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/infisical-httpx-sdk
-    permissions:
-      id-token: write  # IMPORTANT: mandatory for trusted publishing
-    steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-  github-release:
-    name: >-
-      Sign the Python 🐍 distribution 📦 with Sigstore
-      and upload them to GitHub Release
-    needs:
-    - publish-to-pypi
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write  # IMPORTANT: mandatory for making GitHub Releases
-      id-token: write  # IMPORTANT: mandatory for sigstore
-
-    steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Sign the dists with Sigstore
-      uses: sigstore/gh-action-sigstore-python@v3.0.0
-      with:
-        inputs: >-
-          ./dist/*.tar.gz
-          ./dist/*.whl
-    - name: Create GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: >-
-        gh release create
-        "$GITHUB_REF_NAME"
-        --repo "$GITHUB_REPOSITORY"
-        --notes ""
-    - name: Upload artifact signatures to GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      # Upload to GitHub Release using the `gh` CLI.
-      # `dist/` contains the built packages, and the
-      # sigstore-produced signatures and certificates.
-      run: >-
-        gh release upload
-        "$GITHUB_REF_NAME" dist/**
-        --repo "$GITHUB_REPOSITORY"

@@ -8,6 +8,7 @@ backend_packages = [
     "pants.backend.shell",
     "pants.backend.shell.lint.shfmt",
     "pants.backend.shell.lint.shellcheck",
+    "pants.backend.experimental.adhoc",
 ]
 
 [anonymous-telemetry]
@@ -17,8 +18,9 @@ enabled = false
 all = "::"
 lock = "generate-lockfiles"
 venv = "export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default"
-gendocs = ":pyproject#handsdown -- --external git@github.com:riebecj/infisical-httpx-sdk.git -n infisical-httpx-sdk --branch main --toc-depth 2"
+gendocs = "scripts/generate_github_pages.py"
 mkdocs = ":mkdocs"
+mkdocs-serve = ":mkdocs-serve"
 
 [source]
 root_patterns = [
