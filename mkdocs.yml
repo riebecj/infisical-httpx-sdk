@@ -1,14 +1,25 @@
 site_name: "infisical-httpx-sdk"
+site_description: "The Un-Official Infisical Python SDK using HTTPX"
 repo_url: "https://github.com/riebecj/infisical-httpx-sdk"
-site_dir: "docs"
-docs_dir: "gh-pages"
-
+repo_name: "GitHub"
+site_dir: "site"
+docs_dir: "docs"
+exclude_docs: |
+  src/infisical/index.md
+  src/infisical/clients/index.md
+  src/infisical/credentials/index.md
+  src/infisical/resources/index.md
+validation:
+  omitted_files: warn
+  absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
+  unrecognized_links: warn
+  anchors: warn
 watch:
   - src/infisical
-
+  - README.md
+  - stylesheet.css
 extra_css:
   - stylesheet.css
-
 nav:
   - Home: README.md
   - Clients: 
@@ -25,8 +36,10 @@ nav:
   - Exceptions: src/infisical/exceptions.md
   - Types: src/infisical/_types.md
   - PyPI: https://pypi.org/project/infisical-httpx-sdk/
-
 plugins:
+- gen-files:
+    scripts:
+      - scripts/generate_github_pages.py
 - mkdocstrings:
     default_handler: python_xref
     handlers:
@@ -63,24 +76,24 @@ plugins:
           unwrap_annotated: true
           relative_crossrefs: true
           check_crossrefs: yes
-          
 theme:
   name: material
   icon:
-    logo: material/file-check-outline
+    logo: material/all-inclusive
   include_sidebar: true
   palette:
     - scheme: default
       media: "(prefers-color-scheme: light)"
+      primary: yellow
+      accent: indigo
       toggle:
-        icon: material/toggle-switch-off-outline
+        icon: material/moon-waxing-crescent
         name: Switch to dark mode
     - scheme: slate
       media: "(prefers-color-scheme: dark)"
-      primary: blue
-      accent: blue
+      primary: yellow
       toggle:
-        icon: material/toggle-switch
+        icon: material/weather-sunny
         name: Switch to light mode
   features:
     - navigation.top

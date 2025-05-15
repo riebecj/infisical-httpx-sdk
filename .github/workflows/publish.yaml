@@ -87,8 +87,6 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v4
-      with:
-        ref: docs
     - name: Configure Pants caching to GitHub Actions Cache
       uses: actions/github-script@v6
       with:
@@ -100,24 +98,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.11"
-    - name: Setup git
-      run: |
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "github-actions"
-    - name: Fetch changes from main
-      run: |
-        git fetch origin
-        git reset --hard origin/main
-    - name: Build Docs Site
+    - name: Deploy Docs Site
       run: |
         curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
-        rm -rf docs/ gh-pages/
         pants venv
         source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
-        pants run gendocs
-        pants run mkdocs
-    - name: Commit docs
-      run: |
-        git add docs
-        git commit -m "Update GitHub Pages"
-        git push origin docs -f
+        pants run mkdocs gh-deploy

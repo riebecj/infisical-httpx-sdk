@@ -1,7 +1,8 @@
-import shutil
 import textwrap
 from pathlib import Path
 
+import mkdocs_gen_files
+from handsdown.md_document import MDDocument
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.exceptions import LoaderError
 from handsdown.generators.base import BaseGenerator
@@ -15,12 +16,19 @@ class MkdocstringsGenerator(BaseGenerator):
         path_finder = PathFinder(source_path)
         super().__init__(
             input_path=source_path,
-            output_path=source_path / "gh-pages",
+            output_path=source_path / "docs",
             source_paths=path_finder.glob("**/*.py"),
             project_name="infisical-httpx-sdk",
             source_code_url="https://github.com/riebecj/infisical-httpx-sdk/blob/main/",
             source_code_path="main",
         )
+
+    def _mkdocs_write(self, doc: MDDocument, record: ModuleRecord, content: str) -> None:
+        """Write the generated documentation to the output path."""
+        write_path = doc.path.relative_to(self._output_path)
+        with mkdocs_gen_files.open(write_path, "w") as f:
+            f.write(content)
+        print(f"Updated doc {write_path} for {record.source_path}")
 
     def _generate_doc(self, module_record: ModuleRecord) -> None:
         md_document = self.get_md_document(module_record)
@@ -55,18 +63,15 @@ class MkdocstringsGenerator(BaseGenerator):
 
                 ::: {module_record.import_string.value}.models
                 """)
-                if self._write_changed(md_document.path, content):
-                    print(f"Updated doc {md_document.path} for {module_record.source_path}")
+                self._mkdocs_write(md_document, module_record, content)
             elif str(module_record.source_path).endswith("base.py"):
                 content = textwrap.dedent(f"""
                 # {module_record.title}
 
                 ::: {module_record.import_string.value}
                 """)
-                if self._write_changed(md_document.path, content):
-                    print(f"Updated doc {print_path(md_document.path)} for {print_path(module_record.source_path)}")
+                self._mkdocs_write(md_document, module_record, content)
             else:
-                # import pdb; pdb.set_trace()
                 print(f"Skipping {print_path(module_record.source_path)}")
         else:
             content = textwrap.dedent(f"""
@@ -74,25 +79,27 @@ class MkdocstringsGenerator(BaseGenerator):
 
             ::: {module_record.import_string.value}
             """)
-            if self._write_changed(md_document.path, content):
-                print(f"Updated doc {print_path(md_document.path)} for {print_path(module_record.source_path)}")
+            self._mkdocs_write(md_document, module_record, content)
 
 
-shutil.rmtree(Path.cwd() / "gh-pages", ignore_errors=True)
+index_header = textwrap.dedent(f"""---
+hide:
+    - navigation
+---
+                            
+""")
+
+def _include_extras(path: Path) -> None:
+    with path.open("rt") as f:
+        content = f.read()
+    
+    if path.name == "README.md":
+        content = index_header + content
+
+    with mkdocs_gen_files.open(path.name, "wt+") as f:
+        f.write(content)
+
 handsdown = MkdocstringsGenerator()
 handsdown.generate_docs()
-shutil.copyfile(
-    Path.cwd() / "stylesheet.css",
-    Path.cwd() / "gh-pages" / "stylesheet.css",
-)
-gh_pages_header = textwrap.dedent(f"""---
-hide:
-  - navigation
----
-
-""")
-with (Path.cwd() / "README.md").open("rt") as readme_file:
-    content = readme_file.read()
-
-with (Path.cwd() / "gh-pages" / "README.md").open("wt+") as docs_index:
-    docs_index.write(gh_pages_header + content)
+_include_extras(Path.cwd() / "stylesheet.css")
+_include_extras(Path.cwd() / "README.md")

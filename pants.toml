@@ -19,8 +19,7 @@ all = "::"
 lock = "generate-lockfiles"
 venv = "export --py-resolve-format=symlinked_immutable_virtualenv --resolve=python-default"
 gendocs = "scripts/generate_github_pages.py"
-mkdocs = ":mkdocs"
-mkdocs-serve = ":mkdocs-serve"
+mkdocs = ":mkdocs --"
 
 [source]
 root_patterns = [

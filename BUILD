@@ -8,7 +8,7 @@ files(
     sources=["pyproject.toml", "README.md", "LICENSE"],
 )
 
-file(
+resource(
     name="mkdocs-config",
     source="mkdocs.yml",
 )
@@ -26,22 +26,9 @@ python_distribution(
 pex_binary(
     name="mkdocs",
     entry_point="mkdocs",
-    args=["build"],
     dependencies=[
-        ":pyproject#mkdocs-material",
-        ":pyproject#mkdocstrings",
-        ":pyproject#mkdocstrings-python-xref",
-        ":pyproject#ruff",
-        "src/infisical:infisical",
-        ":mkdocs-config",
-    ],
-)
-
-pex_binary(
-    name="mkdocs-serve",
-    entry_point="mkdocs",
-    args=["serve"],
-    dependencies=[
+        ":pyproject#handsdown",
+        ":pyproject#mkdocs-gen-files",
         ":pyproject#mkdocs-material",
         ":pyproject#mkdocstrings",
         ":pyproject#mkdocstrings-python-xref",

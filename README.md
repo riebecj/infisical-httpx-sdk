@@ -87,7 +87,8 @@ In keeping with the same `list()` example, here's how it would look in your code
 from infisical import InfisicalClient
 
 with InfisicalClient(token="token") as client:
-    secrets = client.secrets.list(workspaceId="uuid", environment="env") # `uuid` should be a real UUID and `env` should be your environment slug
+    # `uuid` should be a real UUID and `env` should be your environment slug
+    secrets = client.secrets.list(workspaceId="uuid", environment="env")
     for secret in secrets.secrets:
         print(secret.secret_key)
 ```
@@ -121,7 +122,9 @@ import json
 import boto3
 from infisical import InfisicalClient
 
-identity = json.loads(boto3.client("secretsmanager").get_secret_value(SecretId="MyInfisicalIdentity")["SecretString"])
+identity = json.loads(
+    boto3.client("secretsmanager").get_secret_value(SecretId="MyInfisicalIdentity")["SecretString"]
+)
 client = InfisicalClient(client_id=identity["client_id"], client_secret=identity["client_secret"])
 ```
 
@@ -137,6 +140,7 @@ Self explanatory, this looks for the `INFISICAL_CLIENT_ID` and `INFISICAL_CLIENT
 This provider looks for a `~/.infisical/infisical-config.json` file, which is created when using the [`infisical login`](https://infisical.com/docs/cli/commands/login) CLI command and the [vault](https://infisical.com/docs/cli/commands/vault) is set to `file`. This is similar to the [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) in that this SDK can utilize the settings stored within it and the JWE stored in the keyring file to access the correct auth token.
 
 >CAUTION: This method is meant for use by the user logged in to the local machine and performs all API calls as that specified user. An expired token in the JWE will raise an exception, and the user must perform `infisical login` again to refresh it manually. Which is why it is recommended to use Universal Auth credentials for production.
+
 
 >NOTE: The current SDK does not currently support the `auto` vault, which is based on the available kernel keyring.
 
@@ -156,8 +160,11 @@ class MyProvider(BaseInfisicalProvider):
         # Or an already generated token
         self.token = ...
         
-        # You can also include a mechanism for setting the Infisical base URL
-        self.url = ...  # standard default for all providers is the `INFISICAL_URL` environment variable if set or "https://us.infisical.com"
+        # You can also include a mechanism for setting the Infisical base URL.
+        # Default for all providers is the `INFISICAL_URL` environment variable
+        # if it's set or "https://us.infisical.com".
+        self.url = ... 
+        
 ```
 
 The you can add it to the provider chain and pass the provider chain to the client:
@@ -168,7 +175,8 @@ from infisical.credentials.providers import InfisicalCredentialProviderChain
 from my_provider import MyProvider
 
 provider_chain = InfisicalCredentialProviderChain()
-provider_chain.add_provider(MyProvider(), 0)  # You can change the index where it's inserted into the chain, but the default is 0.
+# You can change the index where it's inserted into the chain, but the default is 0.
+provider_chain.add_provider(MyProvider(), 0)
 client = InfisicalClient(provider_chain=provider_chain)
 ```
 
@@ -255,17 +263,21 @@ It will generate both a `*.whl` and a `*.tar.gz` in the `./dist` directory.
 
 ### Generate Documentation
 
-To make it easier to find documentation, as well as generate API documentation, this repo automatically generates docs. There's already an aliased `pants` command to do this, so all you have to do is make sure the class/method docstrings are updated correctly and run:
+To make it easier to generate API documentation, this repo automatically generates all documentation with MkDocs. So, all you have to do is make sure the class/method docstrings are updated correctly and run:
 
 ```bash
-pants run gendocs
+pants run mkdocs serve
 ```
 
-This generates the Markdown mkdocstrings docs in the `gh-pages` directory. To see how it'll look live, run:
+This generates the markdown docs on-the-fly and serves them. You can then update the sources to see how it looks before committing, including the `stylesheet.css` and `README.md`. To check the fully built HTML files, just run:
 
 ```bash
-pants run mkdocs-serve
+pants run mkdocs build
 ```
+
+It's not necessary, as the `serve` command runs the same code just without emitting the files.
+
+>NOTE: It will generate the fully built HTML documentation in the `site` folder. The `docs` folder is necessary for MkDocs to populate the virtual Markdown files but they're not actually rendered out.
 
 ### Versioning
 
