@@ -4,12 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "infisical-httpx-sdk"
-version = "1.0.5"
+version = "1.0.6"
 authors = [
     {name = "riebecj"},
 ]
 description = "The Un-official Infisical Python SDK using HTTPX "
-urls = {home-page = "https://github.com/riebecj/infisical-httpx-sdk"}
 readme = "README.md"
 requires-python = ">=3.11"
 keywords = [
@@ -42,6 +41,10 @@ dependencies = [
     "keyring==25.6.0",
     "pydantic==2.11.4",
 ]
+[project.urls]
+Repository = "https://github.com/riebecj/infisical-httpx-sdk"
+Issues = "https://github.com/riebecj/infisical-httpx-sdk/issues"
+Documentation = "https://riebecj.github.io/infisical-httpx-sdk/"
 
 [project.optional-dependencies]
 dev = [

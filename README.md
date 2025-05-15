@@ -17,6 +17,8 @@ Implementing all this over the top of the `requests` library currently used by t
 
 ## Installation
 
+The SDK is available on [PyPI](https://pypi.org/project/infisical-httpx-sdk/).
+
 ```bash
 pip3 install infisical-httpx-sdk
 ```
