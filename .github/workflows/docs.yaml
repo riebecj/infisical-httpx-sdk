@@ -1,0 +1,41 @@
+name: Publish Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/generate_github_pages.py"
+      - "mkdocs.yml"
+      - "src/infisical_httpx_sdk/**"
+      - "README.md"
+      - "stylesheet.css"
+
+env:
+  PANTS_CONFIG_FILES: pants.ci.toml
+
+jobs:
+  update-docs:
+    name: Update Docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure Pants caching to GitHub Actions Cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('PANTS_REMOTE_STORE_ADDRESS', process.env.ACTIONS_CACHE_URL);
+          core.exportVariable('PANTS_REMOTE_OAUTH_BEARER_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN);
+    - name: Set up Python
+      id: python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    - name: Deploy Docs Site
+      run: |
+        curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+        pants venv
+        source $(find -L ./dist/export/python/virtualenvs/python-default -name activate)
+        pants run mkdocs gh-deploy --force
