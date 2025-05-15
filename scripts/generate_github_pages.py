@@ -80,13 +80,19 @@ class MkdocstringsGenerator(BaseGenerator):
 
 shutil.rmtree(Path.cwd() / "gh-pages", ignore_errors=True)
 handsdown = MkdocstringsGenerator()
-# handsdown.generate_index()
 handsdown.generate_docs()
 shutil.copyfile(
     Path.cwd() / "stylesheet.css",
     Path.cwd() / "gh-pages" / "stylesheet.css",
 )
-shutil.copyfile(
-    Path.cwd() / "README.md",
-    Path.cwd() / "gh-pages" / "README.md",
-)
+gh_pages_header = textwrap.dedent(f"""---
+hide:
+  - navigation
+---
+
+""")
+with (Path.cwd() / "README.md").open("rt") as readme_file:
+    content = readme_file.read()
+
+with (Path.cwd() / "gh-pages" / "README.md").open("wt+") as docs_index:
+    docs_index.write(gh_pages_header + content)

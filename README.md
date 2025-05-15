@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Infisical HTTPX SDK Documentation
 
 The Un-Official [Infisical](https://infisical.com/docs/documentation/getting-started/introduction) Python SDK using [HTTPX](https://www.python-httpx.org/). Check out the [docs](https://riebecj.github.io/infisical-httpx-sdk/) for more information.

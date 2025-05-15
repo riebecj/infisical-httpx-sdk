@@ -24,6 +24,7 @@ nav:
     - Certificates: src/infisical/resources/certificates/index.md
   - Exceptions: src/infisical/exceptions.md
   - Types: src/infisical/_types.md
+  - PyPI: https://pypi.org/project/infisical-httpx-sdk/
 
 plugins:
 - mkdocstrings:

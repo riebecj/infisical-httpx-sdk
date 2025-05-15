@@ -106,7 +106,7 @@ jobs:
         git config --global user.name "github-actions"
     - name: Fetch changes from main
       run: |
-        git checkout docs
+        git fetch origin
         git reset --hard origin/main
     - name: Build Docs Site
       run: |
