@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "infisical-httpx-sdk"
-version = "1.0.4"
+version = "1.0.5"
 authors = [
     {name = "riebecj"},
 ]
 description = "The Un-official Infisical Python SDK using HTTPX "
 urls = {home-page = "https://github.com/riebecj/infisical-httpx-sdk"}
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 keywords = [
     "infisical-python-sdk", "infisical-httpx-sdk", "infisical-sdk", "infisical", "secrets", "secrets-management", "pki", "kms", "httpx"
 ]
