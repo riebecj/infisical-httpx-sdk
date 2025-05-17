@@ -43,7 +43,7 @@ class BaseClient:
         os.environ["INFISICAL_VERIFY_SSL"] = str(self._verify_ssl)  # Set it for the provider chain
         self._credentials = kwargs.pop(
             "provider_chain",
-            InfisicalCredentialProviderChain(self._provider_chain_kwargs(**kwargs)),
+            InfisicalCredentialProviderChain(**self._provider_chain_kwargs(**kwargs)),
         ).resolve()
         self.url = self._credentials.url
         self.logger = logging.getLogger(self.__class__.__name__)
