@@ -7,7 +7,7 @@ on:
     paths:
       - "scripts/generate_github_pages.py"
       - "mkdocs.yml"
-      - "src/infisical_httpx_sdk/**"
+      - "src/infisical/**"
       - "README.md"
       - "stylesheet.css"
 
