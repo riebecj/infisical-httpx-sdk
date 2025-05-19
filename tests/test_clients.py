@@ -19,17 +19,15 @@ class MockResponse(BaseModel):
 
 
 class TestClientsCommon:
-    @pytest.mark.parametrize("verify_ssl", [True, False])
     @pytest.mark.parametrize("follow_redirects", [True, False])
     @pytest.mark.parametrize("client,httpx_client", [(InfisicalClient, httpx.Client), (InfisicalAsyncClient, httpx.AsyncClient)])
     @patch(f"{BaseClient.__module__}.InfisicalCredentialProviderChain")
-    def test_clients_init(self, mock_chain, client, httpx_client, verify_ssl, follow_redirects):
+    def test_clients_init(self, mock_chain, client, httpx_client, follow_redirects):
         mock_credentials = mock_chain.return_value.resolve.return_value
         mock_credentials.url = "https://test.example"
-        test_client = client(verify_ssl=verify_ssl, follow_redirects=follow_redirects)
+        test_client = client(follow_redirects=follow_redirects)
         # Check init settings
         assert isinstance(test_client.client, httpx_client)
-        assert test_client.client._transport._pool._ssl_context.verify_mode == ssl.CERT_NONE if not verify_ssl else ssl.CERT_REQUIRED
         assert test_client.client.follow_redirects == follow_redirects
         assert test_client.url == "https://test.example"
         mock_chain.return_value.resolve.assert_called_once()

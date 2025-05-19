@@ -26,7 +26,6 @@ class InfisicalClientParams(TypedDict, total=False):
     | `token` | `str` |
     | `client_id` | `str` |
     | `client_secret` | `str` |
-    | `verify_ssl` | `bool` |
     | `follow_redirects` | `bool` |
     | `provider_chain` | [InfisicalCredentialProviderChain][src.infisical.credentials.providers.] |
     """
@@ -35,6 +34,5 @@ class InfisicalClientParams(TypedDict, total=False):
     token: str
     client_id: str
     client_secret: str
-    verify_ssl: bool
     follow_redirects: bool
     provider_chain: "InfisicalCredentialProviderChain"
