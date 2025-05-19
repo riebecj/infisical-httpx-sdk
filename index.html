@@ -1,0 +1,1530 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Un-Official Infisical Python SDK using HTTPX">
+      
+      
+      
+      
+      
+        <link rel="next" href="src/infisical/clients/base/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>infisical-httpx-sdk</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="stylesheet.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#infisical-httpx-sdk-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="infisical-httpx-sdk" class="md-header__button md-logo" aria-label="infisical-httpx-sdk" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L7.8 14.39c-.64.64-1.49.99-2.4.99C3.53 15.38 2 13.87 2 12s1.53-3.38 3.4-3.38c.91 0 1.76.35 2.44 1.03l1.13 1 1.53-1.34L9.22 8.2A5.37 5.37 0 0 0 5.4 6.62C2.42 6.62 0 9.04 0 12s2.42 5.38 5.4 5.38c1.44 0 2.8-.56 3.77-1.53l7.03-6.24c.64-.64 1.49-.99 2.4-.99 1.87 0 3.4 1.51 3.4 3.38s-1.53 3.38-3.4 3.38c-.9 0-1.76-.35-2.44-1.03L15 13.34l-1.5 1.34 1.28 1.12a5.39 5.39 0 0 0 3.82 1.57c2.98 0 5.4-2.41 5.4-5.37 0-3-2.42-5.38-5.4-5.38"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            infisical-httpx-sdk
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-3 .46 10 10 0 0 1 0 19.08A10 10 0 1 0 12 2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="yellow" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/riebecj/infisical-httpx-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="src/infisical/clients/base/" class="md-tabs__link">
+          
+  
+  
+  Clients
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="src/infisical/credentials/providers/" class="md-tabs__link">
+          
+  
+  
+  Credentials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="src/infisical/resources/base/" class="md-tabs__link">
+          
+  
+  
+  Resource APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="src/infisical/utils/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Utilities
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="src/infisical/exceptions/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Exceptions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="src/infisical/_types/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Types
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://pypi.org/project/infisical-httpx-sdk/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  PyPI
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="infisical-httpx-sdk" class="md-nav__button md-logo" aria-label="infisical-httpx-sdk" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L7.8 14.39c-.64.64-1.49.99-2.4.99C3.53 15.38 2 13.87 2 12s1.53-3.38 3.4-3.38c.91 0 1.76.35 2.44 1.03l1.13 1 1.53-1.34L9.22 8.2A5.37 5.37 0 0 0 5.4 6.62C2.42 6.62 0 9.04 0 12s2.42 5.38 5.4 5.38c1.44 0 2.8-.56 3.77-1.53l7.03-6.24c.64-.64 1.49-.99 2.4-.99 1.87 0 3.4 1.51 3.4 3.38s-1.53 3.38-3.4 3.38c-.9 0-1.76-.35-2.44-1.03L15 13.34l-1.5 1.34 1.28 1.12a5.39 5.39 0 0 0 3.82 1.57c2.98 0 5.4-2.41 5.4-5.37 0-3-2.42-5.38-5.4-5.38"/></svg>
+
+    </a>
+    infisical-httpx-sdk
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/riebecj/infisical-httpx-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clients
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clients">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create A Client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticating-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticating a Client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-an-api-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call an API Resource
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credential-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Providers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Credential Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Credentials
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infisical-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infisical Config
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Provider
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-or-updating-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding or Updating Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lint-test-and-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lint, Test, and Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deprecated-api-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deprecated API Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Clients
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Clients
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/clients/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/clients/clients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sync/Async
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Credentials
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Credentials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/credentials/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Providers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/credentials/keyring_handler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Resource APIs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Resource APIs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/resources/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/resources/secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Secrets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/resources/folders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Folders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/resources/certificates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Certificates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Utilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="src/infisical/_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://pypi.org/project/infisical-httpx-sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clients
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clients">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create A Client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticating-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticating a Client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-an-api-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Call an API Resource
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credential-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Providers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Credential Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Credentials
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infisical-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infisical Config
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Provider
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-or-updating-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding or Updating Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lint-test-and-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lint, Test, and Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deprecated-api-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deprecated API Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="infisical-httpx-sdk-documentation">Infisical HTTPX SDK Documentation<a class="headerlink" href="#infisical-httpx-sdk-documentation" title="Permanent link">&para;</a></h1>
+<p>The Un-Official <a href="https://infisical.com/docs/documentation/getting-started/introduction">Infisical</a> Python SDK using <a href="https://www.python-httpx.org/">HTTPX</a>. Check out the <a href="https://riebecj.github.io/infisical-httpx-sdk/">docs</a> for more information.</p>
+<p>There are two main reasons I created this repo despite an existing <a href="https://github.com/Infisical/python-sdk-official">official SDK</a>:</p>
+<ol>
+<li>
+<p>I wanted to utilize HTTPX for both synchronous and asynchronous HTTP calls, as I have use cases for both.</p>
+</li>
+<li>
+<p>The implementation of a <code>boto</code>-esque credential provider chain that supports both Token and Universal auth credentials via:</p>
+<ul>
+<li>Explicitly provided credentials at client creation.</li>
+<li>Environment Variable credentials.</li>
+<li>The <code>~/.infisical/infisical-config.json</code> keyring created when using the <a href="https://infisical.com/docs/cli/commands/login"><code>infisical login</code></a> CLI command.</li>
+</ul>
+</li>
+</ol>
+<p>Implementing all this over the top of the <code>requests</code> library currently used by the official SDK while trying to support sync and async clients would have required a re-architecture what they've already written, and I didn't feel like trying to climb that mountain nor ask them to oversee the climb. They're a busy company and I'm one guy.</p>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The SDK is available on <a href="https://pypi.org/project/infisical-httpx-sdk/">PyPI</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>infisical-httpx-sdk
+</code></pre></div>
+<h2 id="clients">Clients<a class="headerlink" href="#clients" title="Permanent link">&para;</a></h2>
+<p>Since this SDK uses HTTPX for HTTP transport, it support both synchronous and asynchronous clients. Continue reading to learn more about how to create and use the clients.</p>
+<h3 id="create-a-client">Create A Client<a class="headerlink" href="#create-a-client" title="Permanent link">&para;</a></h3>
+<p>Creating a client is as simple as importing your desired client <code>InfisicalClient</code> or <code>InfisicalAsyncClient</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Token Auth</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">client</span> <span class="o">=</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Universal Auth</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">client</span> <span class="o">=</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;client_id&quot;</span><span class="p">,</span> <span class="n">client_secret</span><span class="o">=</span><span class="s2">&quot;client_secret&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</code></pre></div>
+<p>Instantiating the client works the same whether it's synchronous or asynchronous.</p>
+<p>The only exception is if you use the clients in <code>with ...</code> context:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span><span class="p">,</span> <span class="n">InfisicalAsyncClient</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">with</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="o">...</span> <span class="c1"># Call API client methods here</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">async</span> <span class="k">with</span> <span class="n">InfisicalAsyncClient</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="o">...</span> <span class="c1"># await client API methods here</span>
+</code></pre></div>
+<p>The benefit being if you use it within a context manager, exiting the context manager will automatically close the client, otherwise you will need to call <code>client.close()</code> or <code>await client.close()</code> to ensure the HTTPX client closes properly.</p>
+<h3 id="authenticating-a-client">Authenticating a Client<a class="headerlink" href="#authenticating-a-client" title="Permanent link">&para;</a></h3>
+<p>For a full list of currently available credential providers, see <a href="#credential-providers">Credential Providers</a>. </p>
+<p>In this example, we'll be using Universal Auth credentials, which are Client ID and Secret pairs. This is typically what you'd use in SDK integrations, as it is tied to machine identities in Infisical. These are also preferred for long-running SDK uses -- like a daemon process or your own API integration as a secrets backend -- as <code>InfisicalCredentials</code> using Universal Auth can automatically refresh the acquired auth token when it expires. </p>
+<p>You can explicitly provide the credentials like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">client</span> <span class="o">=</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;client_id&quot;</span><span class="p">,</span> <span class="n">client_secret</span><span class="o">=</span><span class="s2">&quot;client_secret&quot;</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>NOTE: Hardcoding credentials in <strong><em>NEVER</em></strong> recommended. While it can be used for development purposes, it is recommended -- even in development -- to either set Environment Variables (ephemeral) or utilize the CLI via <code>infisical login</code> and let the provider chain use your keyring (encrypted).</p>
+</blockquote>
+<p>Other authentication methods may be added later, so please check back later, request one be added via GitHub Issue, or even submit a PR!</p>
+<h3 id="call-an-api-resource">Call an API Resource<a class="headerlink" href="#call-an-api-resource" title="Permanent link">&para;</a></h3>
+<p>While there are some API resources available, and many more yet to be added, calling them is fairly straight forward, as they follow the <a href="https://infisical.com/docs/api-reference/overview/introduction">API Reference</a> in terms of naming conventions. </p>
+<p>For example, the <a href="https://infisical.com/docs/api-reference/endpoints/secrets/list">Secrets</a> endpoint resource is used to interact with secrets inside your Infisical. So, you access the resource methods via the <code>client.secrets</code> property. Given the first method is <code>List</code>, which lists the available secrets, you call the endpoint with <code>client.secrets.list()</code>.</p>
+<blockquote>
+<p>Note: Before you start calling endpoints willy-nilly, bear in mind that there will be some required arguments or keyword arguments you must provide to the function call. In the <code>list()</code> example above, the documentation does not specify that a <code>workspaceId</code> or <code>environment</code> is required. However, not providing them always returns a <code>4XX</code>. So, I've implemented a basic validation check for required parameters before making the call which will raise a <code>InfisicalResourceError</code> if the required query parameters are not provided. This is an effort to reduce the number of calls to APIs that we know are invalid.</p>
+</blockquote>
+<p>In keeping with the same <code>list()</code> example, here's how it would look in your code to print a list of secrets in the root <code>/</code> of the project with a given project (workspace) ID and environment:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">with</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;token&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># `uuid` should be a real UUID and `env` should be your environment slug</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">secrets</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">secrets</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">workspaceId</span><span class="o">=</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="s2">&quot;env&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">for</span> <span class="n">secret</span> <span class="ow">in</span> <span class="n">secrets</span><span class="o">.</span><span class="n">secrets</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">secret</span><span class="o">.</span><span class="n">secret_key</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="credential-providers">Credential Providers<a class="headerlink" href="#credential-providers" title="Permanent link">&para;</a></h2>
+<p>Given the multitude of methods to provide credentials to a process, the SDK utilizes a credential provider chain that iterates through the various methods in this order:</p>
+<p>1) <strong>Explicitly Provided</strong>: These are passed as a(n) keyword argument(s) to the client constructor.
+2) <strong>Environment Variables</strong>: Set in your current shell/daemon environment based on your OS type.
+3) <strong>Infisical Config</strong>: This is created when using the Infisical CLI <code>infisical login</code> command. </p>
+<p>The first two providers accept either a Universal Auth Client ID and Secret, or a Token. In the given chain, if neither set of credentials are found, it will move on to the next provider. Should no credentials be found in <em>any</em> provider, it will raise an <code>InfisicalCredentialsError</code> exception.</p>
+<p>The Universal Auth credentials are preferred as it allows the SDK to refresh your credentials on token expiration. When the provider chain resolves the Universal Auth credentials it finds, it calls the <a href="https://infisical.com/docs/api-reference/endpoints/universal-auth/login">Universal Auth</a> endpoint to acquire a JWT that it uses when making API calls via the <code>Authorization: Bearer ...</code> header. Each call validates the JWT and expiration will trigger a refresh before setting the token in the header.</p>
+<p>Using Token Auth is allowed, but since there is no mechanism for refreshing a JWT, an expired token raises an <code>InfisicalCredentialsError</code> exception. </p>
+<blockquote>
+<p>NOTE: There is a <a href="https://infisical.com/docs/api-reference/endpoints/jwt-auth/login">JWT Auth Login</a> endpoint which might provide a mechanism for refreshing a token-based credential but I have not looked into it yet.</p>
+</blockquote>
+<h3 id="explicit-credentials">Explicit Credentials<a class="headerlink" href="#explicit-credentials" title="Permanent link">&para;</a></h3>
+<p>This method is <strong><em>NOT RECOMMENDED</em></strong> for use in production unless you're using some other secure place to acquire the credentials before passing them in via variables and not hardcoded strings (e.g. using an EC2 Instance Profile to get them from AWS Secrets Manager).</p>
+<p>Here's an example that gets them from AWS Secrets Manager:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Let&#39;s be secure about how we explicitly pass credentials</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">identity</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;secretsmanager&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(</span><span class="n">SecretId</span><span class="o">=</span><span class="s2">&quot;MyInfisicalIdentity&quot;</span><span class="p">)[</span><span class="s2">&quot;SecretString&quot;</span><span class="p">]</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">client</span> <span class="o">=</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="n">identity</span><span class="p">[</span><span class="s2">&quot;client_id&quot;</span><span class="p">],</span> <span class="n">client_secret</span><span class="o">=</span><span class="n">identity</span><span class="p">[</span><span class="s2">&quot;client_secret&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>If you're worried about you or someone you work with accidentally committing hardcoded secrets, check out Infisical's <a href="https://infisical.com/docs/documentation/platform/secret-scanning">Secret Scanning</a> that integrates with your GitHub or the <a href="https://infisical.com/docs/cli/scanning-overview#automatically-scan-changes-before-you-commit">CLI Secret Scanner</a> to scan your project before committing!</p>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
+<p>Self explanatory, this looks for the <code>INFISICAL_CLIENT_ID</code> and <code>INFISICAL_CLIENT_SECRET</code> in the OS environment, or <code>INFISICAL_TOKEN</code>. It is possible to set all three in your environment before initializing a client but it is <strong>recommended</strong> to only set one or the other. Universal Auth credentials are the preferred credentials, and will always be used if they are found. If they are not found, it will look for a token.</p>
+<h3 id="infisical-config">Infisical Config<a class="headerlink" href="#infisical-config" title="Permanent link">&para;</a></h3>
+<p>This provider looks for a <code>~/.infisical/infisical-config.json</code> file, which is created when using the <a href="https://infisical.com/docs/cli/commands/login"><code>infisical login</code></a> CLI command and the <a href="https://infisical.com/docs/cli/commands/vault">vault</a> is set to <code>file</code>. This is similar to the <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html">AWS CLI config file</a> in that this SDK can utilize the settings stored within it and the JWE stored in the keyring file to access the correct auth token.</p>
+<blockquote>
+<p>CAUTION: This method is meant for use by the user logged in to the local machine and performs all API calls as that specified user. An expired token in the JWE will raise an exception, and the user must perform <code>infisical login</code> again to refresh it manually. Which is why it is recommended to use Universal Auth credentials for production.</p>
+<p>NOTE: The current SDK does not currently support the <code>auto</code> vault, which is based on the available kernel keyring.</p>
+</blockquote>
+<h3 id="custom-provider">Custom Provider<a class="headerlink" href="#custom-provider" title="Permanent link">&para;</a></h3>
+<p>Should you wish to create your own credential provider and add it to the chain, you can do so by inheriting from <code>BaseInfisicalProvider</code> and setting the <code>_load()</code> abstract method in your provider. </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical.credentials.providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseInfisicalProvider</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyProvider</span><span class="p">(</span><span class="n">BaseInfisicalProvider</span><span class="p">):</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_load</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="c1"># Load Universal Auth credentials here</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">client_secret</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="c1"># Or an already generated token</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="c1"># You can also include a mechanism for setting the Infisical base URL.</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="c1"># Default for all providers is the `INFISICAL_URL` environment variable</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="c1"># if it&#39;s set or &quot;https://us.infisical.com&quot;.</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="o">...</span> 
+</code></pre></div>
+<p>The you can add it to the provider chain and pass the provider chain to the client:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical.clients</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalClient</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">infisical.credentials.providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">InfisicalCredentialProviderChain</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">my_provider</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyProvider</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">provider_chain</span> <span class="o">=</span> <span class="n">InfisicalCredentialProviderChain</span><span class="p">()</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># You can change the index where it&#39;s inserted into the chain, but the default is 0.</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">provider_chain</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">MyProvider</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">client</span> <span class="o">=</span> <span class="n">InfisicalClient</span><span class="p">(</span><span class="n">provider_chain</span><span class="o">=</span><span class="n">provider_chain</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
+<p>To have your PR accepted, ensure that you follow these guidelines. In a nutshell, here's what's required:</p>
+<p>1) It passes <code>lint</code> and <code>test</code>, and it can <code>package</code> successfully.
+2) You have updated the version in accordance with the <a href="#versioning">versioning</a> guide.
+3) Any changes or additions have <a href="#generate-documentation">updated docs</a>.</p>
+<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h3>
+<p>Ensure you have Python 3.11 or greater installed.</p>
+<p>This repository builds with <a href="https://www.pantsbuild.org/">pants</a>, which only supports Linux and Mac. If you're on Windows, you can use WSL. To install pants, use this command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>--proto<span class="w"> </span><span class="s1">&#39;=https&#39;</span><span class="w"> </span>--tlsv1.2<span class="w"> </span>-fsSL<span class="w"> </span>https://static.pantsbuild.org/setup/get-pants.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
+<p>You can also use <code>brew</code> on Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>brew<span class="w"> </span>install<span class="w"> </span>pantsbuild/tap/pants
+</code></pre></div>
+<p>Then you need to install the dependencies into a virtual environment. Do this by running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pants<span class="w"> </span>venv
+</code></pre></div>
+<blockquote>
+<p>NOTE: The <code>venv</code> command is just an alias. You can see the actual command in the <code>pants.toml</code> and read more about it <a href="https://www.pantsbuild.org/2.25/docs/using-pants/setting-up-an-ide#python-third-party-dependencies-and-tools">here</a>.</p>
+</blockquote>
+<p>Then you can point your IDE's interpreter path to <code>dist/export/python/virtualenvs/python-default/&lt;VERSION&gt;/bin/python3</code>. In VSCode, it will pick up the dependencies symlinked in the venv and work just like a standard venv.</p>
+<h3 id="adding-or-updating-dependencies">Adding or Updating Dependencies<a class="headerlink" href="#adding-or-updating-dependencies" title="Permanent link">&para;</a></h3>
+<p>The project dependencies are pinned to the full semantic versions, which means they must be upgraded explicitly. This is to prevent accidental breaking changes deploying to production. Updating them is simple:</p>
+<p>1) Update the desired dependency version in <code>project.dependencies</code> in the <code>pyproject.toml</code>.
+2) Run <code>pants lock</code> to update the lock file.
+3) Run <code>pants venv</code> to update the venv with the latest dependencies
+4) Run <code>pants lint all</code>, <code>pants test all</code>, and <code>pants package all</code>. Make sure they all succeed.</p>
+<blockquote>
+<p>NOTE: All <code>project.optional-dependencies.dev</code> are pinned to the minor version, which means patch version are updated automatically during <code>pants lock</code> if a new version exists. </p>
+</blockquote>
+<h3 id="lint-test-and-build">Lint, Test, and Build<a class="headerlink" href="#lint-test-and-build" title="Permanent link">&para;</a></h3>
+<p>To lint the project sources, just run</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pants<span class="w"> </span>lint<span class="w"> </span>all
+</code></pre></div>
+<blockquote>
+<p>NOTE: The <code>all</code> argument is just an alias for <code>::</code> in pants, which means all targets. I use this alias as it makes things a bit easier to understand.</p>
+</blockquote>
+<p>If you run into any formatting or linting errors caught by <a href="https://docs.astral.sh/ruff/">ruff</a>, you can fix what is automatically fixable via</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pants<span class="w"> </span>fix<span class="w"> </span>all
+</code></pre></div>
+<p>Anything else will have to be fixed by hand.</p>
+<p>If all sources pass linting, you can run unit tests via:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pants<span class="w"> </span><span class="nb">test</span><span class="w"> </span>all
+</code></pre></div>
+<p>The test coverage will print to the console.</p>
+<p>To make sure it builds after all tests pass, run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pants<span class="w"> </span>package<span class="w"> </span>all
+</code></pre></div>
+<p>It will generate both a <code>*.whl</code> and a <code>*.tar.gz</code> in the <code>./dist</code> directory.</p>
+<blockquote>
+<p>NOTE: Ensure all three (lint, test, and build) pass before submitting a PR.</p>
+</blockquote>
+<h3 id="generate-documentation">Generate Documentation<a class="headerlink" href="#generate-documentation" title="Permanent link">&para;</a></h3>
+<p>To make it easier to generate API documentation, this repo automatically generates all documentation with MkDocs. So, all you have to do is make sure the class/method docstrings are updated correctly and run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pants<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
+</code></pre></div>
+<p>This generates the markdown docs on-the-fly and serves them. You can then update the sources to see how it looks before committing, including the <code>stylesheet.css</code> and <code>README.md</code>. To check the fully built HTML files, just run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>pants<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>build
+</code></pre></div>
+<p>It's not necessary, as the <code>serve</code> command runs the same code just without emitting the files.</p>
+<blockquote>
+<p>NOTE: It will generate the fully built HTML documentation in the <code>site</code> folder. The <code>docs</code> folder is necessary for MkDocs to populate the virtual Markdown files but they're not actually rendered out.</p>
+</blockquote>
+<h3 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h3>
+<p>I like explicit semantic versioning, so if your PR is a patch or bug fix, increase the PATCH version by 1 in the <code>pyproject.toml</code>.</p>
+<blockquote>
+<p>EXAMPLE: If the current version is <code>1.0.0</code>, the version in your PR should be <code>1.0.1</code>.</p>
+</blockquote>
+<p>If your PR introduces a new feature like implementing new or updated API routes, increase the MINOR version by 1 and set the PATCH version to 0.</p>
+<blockquote>
+<p>EXAMPLE: Version <code>1.0.1</code> now becomes <code>1.1.0</code>.</p>
+</blockquote>
+<p>And any major or breaking changes, including things like refactoring, get their own MAJOR version release. This ensures those who pin the major version won't break in production, but can still get minor and patch updates.</p>
+<h3 id="deprecated-api-routes">Deprecated API Routes<a class="headerlink" href="#deprecated-api-routes" title="Permanent link">&para;</a></h3>
+<p>Infisical is known to deprecate certain API version routes. Should this be the case, the specified versioned route will raise a <code>DeprecationWarning</code> every call and we'll try to include deprecation messages specific to it, but we may continue to include the deprecated route until a major version release. That means, depending on your Infisical instance version may not contain routes in this SDK. In which case, the HTTP client will most likely return a <code>400</code> or <code>404</code>.</p>
+<blockquote>
+<p>NOTE: The parity between this SDK and Infisical's actual API will try to be as close as possible while still retaining backwards compatibility for those who have organizations that slow to upgrade.</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.top", "navigation.tabs", "navigation.instant", "navigation.tracking", "content.code.annotate"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
