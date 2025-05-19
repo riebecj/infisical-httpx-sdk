@@ -33,6 +33,7 @@ nav:
     - Secrets: src/infisical/resources/secrets/index.md
     - Folders: src/infisical/resources/folders/index.md
     - Certificates: src/infisical/resources/certificates/index.md
+  - Utilities: src/infisical/utils.md
   - Exceptions: src/infisical/exceptions.md
   - Types: src/infisical/_types.md
   - PyPI: https://pypi.org/project/infisical-httpx-sdk/
