@@ -1,7 +1,6 @@
 """Infisical Base Client Module."""
 
 import logging
-import os
 from abc import abstractmethod
 from collections.abc import Callable, Coroutine
 from typing import Any, Literal, Unpack
