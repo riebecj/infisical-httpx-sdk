@@ -9,7 +9,8 @@ import httpx
 from jwcrypto.jwt import JWT, JWTExpired, JWTNotYetValid
 
 from infisical.credentials.keyring_handler import FileKeyringBackend
-from infisical.exceptions import InfisicalCredentialsError
+from infisical.exceptions import InfisicalCredentialsError, InfisicalHTTPError
+from infisical.utils import default_ssl_context
 
 
 class InfisicalCredentials:
@@ -75,14 +76,12 @@ class InfisicalCredentials:
         ???+ tip "SSL Verification"
 
             By default, SSL verification is enabled. If you need to disable it, set the `INFISICAL_VERIFY_SSL`
-            environment variable to `false`, `0`, or `no`; or pass the `verify_ssl` keyword argument to the client
-            `__init__` set to `False`. This is ***not recommended*** in production environments.
+            environment variable to `false`, `0`, or `no`. This is ***not recommended*** in production environments.
         """
         if not self._refreshable:
             return
 
-        verify = os.getenv("INFISICAL_VERIFY_SSL", "true").lower() not in ("0", "false", "no")
-        with httpx.Client(verify=verify) as client:
+        with httpx.Client(verify=default_ssl_context()) as client:
             response = client.post(
                 f"{self.url}/api/v1/auth/universal-auth/login",
                 json={
@@ -94,8 +93,12 @@ class InfisicalCredentials:
                     "Accept": "application/json",
                 },
             )
-            response.raise_for_status()
-            self._token = response.json()["accessToken"]
+            try:
+                response.raise_for_status()
+            except httpx.HTTPStatusError as exc:
+                raise InfisicalHTTPError(response.json()) from exc
+            else:
+                self._token = response.json()["accessToken"]
 
     def __check_refresh__(self) -> None:
         """Check if the credentials are expired, and refreshes them if available.

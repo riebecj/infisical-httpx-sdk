@@ -16,6 +16,7 @@ from pydantic import BaseModel
 
 from infisical._types import InfisicalClientParams
 from infisical.clients.base import BaseClient
+from infisical.utils import default_ssl_context
 
 
 class InfisicalClient(BaseClient):
@@ -28,7 +29,7 @@ class InfisicalClient(BaseClient):
     def __init__(self, **kwargs: Unpack[InfisicalClientParams]) -> None:
         """Initialize with any [client parameter][src.infisical._types.InfisicalClientParams]."""
         super().__init__(**kwargs)
-        self.client = httpx.Client(verify=self._verify_ssl, follow_redirects=self._follow_redirects)
+        self.client = httpx.Client(verify=default_ssl_context(), follow_redirects=self._follow_redirects)
 
     def __enter__(self) -> Self:
         """Enter the context manager and return this class.
@@ -133,7 +134,7 @@ class InfisicalAsyncClient(BaseClient):
     def __init__(self, **kwargs: Unpack[InfisicalClientParams]) -> None:
         """Initialize with any [client parameter][src.infisical._types.InfisicalClientParams]."""
         super().__init__(**kwargs)
-        self.client = httpx.AsyncClient(verify=self._verify_ssl, follow_redirects=self._follow_redirects)
+        self.client = httpx.AsyncClient(verify=default_ssl_context(), follow_redirects=self._follow_redirects)
 
     async def __aenter__(self) -> Self:
         """Enter the `async` context manager and return class.

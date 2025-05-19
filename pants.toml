@@ -10,6 +10,7 @@ backend_packages = [
     "pants.backend.shell.lint.shellcheck",
     "pants.backend.experimental.adhoc",
 ]
+ca_certs_path = "/etc/ssl/certs/ca-certificates.crt"
 
 [anonymous-telemetry]
 enabled = false

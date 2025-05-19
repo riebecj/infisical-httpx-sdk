@@ -38,9 +38,7 @@ class BaseClient:
 
     def __init__(self, **kwargs: Unpack[InfisicalClientParams]) -> None:
         """Initialize with any [optional parameter][src.infisical._types.InfisicalClientParams]."""
-        self._verify_ssl = kwargs.pop("verify_ssl", True)
         self._follow_redirects = kwargs.pop("follow_redirects", False)
-        os.environ["INFISICAL_VERIFY_SSL"] = str(self._verify_ssl)  # Set it for the provider chain
         self._credentials = kwargs.pop(
             "provider_chain",
             InfisicalCredentialProviderChain(**self._provider_chain_kwargs(**kwargs)),
@@ -67,10 +65,7 @@ class BaseClient:
         }
 
     def _set_apis(self) -> None:
-        """Set the APIs in a separate dunder method to keep the constructor clean.
-
-        You will find a list of the APIs in the `Attributes` table of
-        """
+        """Set the APIs in a separate private method to keep the constructor clean."""
         self.logger.debug("Setting up APIs")
         self.certificates = Certificates(self)
         self.folders = Folders(self)
