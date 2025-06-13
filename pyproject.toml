@@ -39,7 +39,7 @@ dependencies = [
     "httpx==0.28.1",
     "jwcrypto==1.5.6",
     "keyring==25.6.0",
-    "pydantic==2.11.4",
+    "pydantic==2.11.6",
 ]
 [project.urls]
 Repository = "https://github.com/riebecj/infisical-httpx-sdk"
@@ -55,7 +55,7 @@ dev = [
     "mkdocstrings[python]~=0.18",
     "mkdocstrings-python-xref~=1.16",
     "pytest~=8.3",
-    "pytest-asyncio~=0.26",
+    "pytest-asyncio>=0.26,<2.0",
     "pytest-cov~=6.1",
     "ruff~=0.11",
 ]
